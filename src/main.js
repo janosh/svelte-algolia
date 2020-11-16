@@ -89,9 +89,9 @@ async function overwriteUpdate(index, data, client, config) {
   const settings = await index.getSettings()
   await tmpIndex.setSettings(settings)
 
-  await tmpIndex.saveObjects(data)
+  await tmpIndex.saveObjects(data).wait()
   // move the tmp index to the existing index, overwrites the latter
-  await client.moveIndex(`${name}_tmp`, name)
+  await client.moveIndex(`${name}_tmp`, name).wait()
   if (config.verbosity > 0)
     console.log(`index '${name}': wrote ${data.length} items`)
 }
@@ -140,7 +140,7 @@ async function partialUpdate(index, data, matchFields, config) {
         `index '${name}': found ${toIndex.length} new or modified objects; indexing...`
       )
     if (config.verbosity > 1) console.log(JSON.stringify(toIndex, null, 2))
-    await index.saveObjects(toIndex)
+    await index.saveObjects(toIndex).wait()
   }
 
   if (toRemove.length) {

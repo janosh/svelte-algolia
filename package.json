@@ -22,7 +22,7 @@
     "prettier": "^2.1.2"
   },
   "scripts": {
-    "test": "ava",
+    "test": "ava --timeout=2m",
     "prepublishOnly": "ava"
   },
   "files": [

@@ -2,9 +2,7 @@
   <img src="assets/banner.svg" alt="Banner" height=150>
 </p>
 
-# svelte-algolia
-
-[![Test Status](https://github.com/janosh/svelte-algolia/workflows/ci/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
+# svelte-algolia &nbsp; [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
 
 This package was inspired by the official [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
 
