@@ -19,9 +19,10 @@ export async function indexAlgolia({ appId, apiKey, indices, ...config }) {
   config = { ...defaultConfig, ...config }
 
   if (config.verbosity > 0) {
-    if (config.partialUpdates) console.log(`Algolia: Partial updates enabled`)
+    if (config.partialUpdates)
+      console.log(`svelte-algolia: Partial updates enabled`)
     console.log(
-      `Algolia: ${indices.length} ${
+      `svelte-algolia: ${indices.length} ${
         indices.length > 1 ? `indices` : `index`
       } to update`
     )
@@ -72,7 +73,7 @@ async function callGetter(getter) {
   results.forEach((obj) => {
     if (!obj.objectID && !obj.id)
       console.error(
-        `failed to index to Algolia: ${JSON.stringify(obj, null, 2)}` +
+        `failed to index to svelte-algolia: ${JSON.stringify(obj, null, 2)}` +
           ` has neither an 'objectID' nor 'id' key`
       )
     // convert to string to prevent processing items with integer IDs as new in partialUpdate

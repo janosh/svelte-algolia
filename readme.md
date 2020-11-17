@@ -2,7 +2,7 @@
   <img src="assets/banner.svg" alt="Banner" height=150>
 </p>
 
-# svelte-algolia &nbsp; [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
+# svelte-algolia &nbsp; [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions) ![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM) ![GitHub](https://img.shields.io/github/license/janosh/svelte-algolia)
 
 This package was inspired by the official [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
 
@@ -21,6 +21,8 @@ This package was inspired by the official [`gatsby-plugin-algolia`](https://gith
 2. Create an `algoliaConfig`:
 
    ```js
+   import 'dotenv/config' // optional
+
    const algoliaConfig = {
      appId: process.env.algoliaAppId,
      apiKey: process.env.algoliaAdminKey,
@@ -31,13 +33,17 @@ This package was inspired by the official [`gatsby-plugin-algolia`](https://gith
    }
    ```
 
-3. Pass your config to the `indexAlgolia` export from this package:
+   The `getData` function is expected to return an array of objects containing the data you wish to index to Algolia (a product catalog, blog posts, documentation pages, pokémons or whatever). Each object in the data array should have a key named either `id` or `objectID` for Algolia to recognize it and overwrite existing data.
+
+3. Pass your config to `indexAlgolia`:
 
    ```js
    import { indexAlgolia } from 'svelte-algolia'
 
    indexAlgolia(algoliaConfig)
    ```
+
+   You can call this function whenever you like to update your indices. Typically, you would include in every production build of your app.
 
 ## Config Options
 

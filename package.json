@@ -1,6 +1,6 @@
 {
   "name": "svelte-algolia",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Algolia plugin for Svelte",
   "main": "src/index.js",
   "module": "src/main.js",
