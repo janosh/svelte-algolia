@@ -57,6 +57,10 @@ const defaultConfig = {
   // check for whether an item has changed; could e.g. be a timestamp, hash or
   // an ID that's updated every time the item has changed; if not provided, items
   // are checked for deep-equality to discover changes
+  settings: {}, // an object of Algolia index settings that applies to all indices
+  // see https://algolia.com/doc/api-reference/settings-api-parameters
+  // can be overridden by a settings object passed as part of the indices array:
+  // indices = [{ name: `pokedex`, ..., settings: { foo: `bar` }}],
 }
 ```
 

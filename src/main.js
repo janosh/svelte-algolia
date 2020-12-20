@@ -5,6 +5,7 @@ const defaultConfig = {
   partialUpdates: false,
   verbosity: 1,
   matchFields: [],
+  settings: {},
 }
 
 export function deepEqual(x, y) {
@@ -35,10 +36,10 @@ export async function indexAlgolia({ appId, apiKey, indices, ...config }) {
   }
 }
 
-const updateIndex = (client, config) => async (updateObj) => {
+const updateIndex = (client, config) => async (indexObj) => {
   const { partialUpdates = false, matchFields: mainMatchFields } = config
-  const { name, getData, matchFields = mainMatchFields } = updateObj
-  let { settings = config.settings } = updateObj
+  const { name, getData, matchFields = mainMatchFields } = indexObj
+  let { settings = config.settings } = indexObj
 
   const index = client.initIndex(name)
   const data = await callGetter(getData)
@@ -48,7 +49,7 @@ const updateIndex = (client, config) => async (updateObj) => {
   // if the index doesn't exist yet, applying settings (even if empty) will create it
   // see https://algolia.com/doc/api-client/methods/manage-indices#create-an-index
   else if (!(await index.exists())) {
-    const { taskID } = await index.setSettings(settings || {})
+    const { taskID } = await index.setSettings(settings)
     await index.waitTask(taskID)
   }
 
