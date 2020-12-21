@@ -45,13 +45,10 @@ const updateIndex = (client, config) => async (indexObj) => {
   const data = await callGetter(getData)
 
   // if user specified any settings, apply them
-  if (settings && (await index.exists())) await index.setSettings(settings)
   // if the index doesn't exist yet, applying settings (even if empty) will create it
   // see https://algolia.com/doc/api-client/methods/manage-indices#create-an-index
-  else if (!(await index.exists())) {
-    const { taskID } = await index.setSettings(settings)
-    await index.waitTask(taskID)
-  }
+  const { taskID } = await index.setSettings(settings)
+  await index.waitTask(taskID)
 
   if (partialUpdates) {
     // get all match fields for all indices to minimize calls to the api

@@ -4,7 +4,7 @@
 
 # svelte-algolia &nbsp; [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions) ![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM) ![GitHub](https://img.shields.io/github/license/janosh/svelte-algolia)
 
-This package was inspired by the official [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
+This package was inspired by [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
 
 ## Usage
 
@@ -18,7 +18,7 @@ This package was inspired by the official [`gatsby-plugin-algolia`](https://gith
    npm i -D svelte-algolia
    ```
 
-2. Create an `algoliaConfig`:
+2. Create an `algoliaConfig` object:
 
    ```js
    import 'dotenv/config' // optional
@@ -33,7 +33,7 @@ This package was inspired by the official [`gatsby-plugin-algolia`](https://gith
    }
    ```
 
-   The `getData` function is expected to return an array of objects containing the data you wish to index to Algolia (a product catalog, blog posts, documentation pages, pokémons or whatever). Each object in the data array should have a key named either `id` or `objectID` for Algolia to recognize it and overwrite existing data.
+   The `getData` function is expected to return an array of objects containing the data you wish to index (a product catalog, blog posts, documentation pages, pokémons or whatever). Each object in the data array should have a key named `id` or `objectID` for Algolia to recognize it and overwrite existing data where appropriate.
 
 3. Pass your config to `indexAlgolia`:
 
@@ -43,7 +43,7 @@ This package was inspired by the official [`gatsby-plugin-algolia`](https://gith
    indexAlgolia(algoliaConfig)
    ```
 
-   You can call this function whenever you like to update your indices. Typically, you would include in every production build of your app.
+   You can call this function wherever you'd like to update your indices. Typically, you would include this in every production build of your app.
 
 ## Config Options
 
@@ -58,8 +58,8 @@ const defaultConfig = {
   // an ID that's updated every time the item has changed; if not provided, items
   // are checked for deep-equality to discover changes
   settings: {}, // an object of Algolia index settings that applies to all indices
-  // see https://algolia.com/doc/api-reference/settings-api-parameters
-  // can be overridden by a settings object passed as part of the indices array:
+  // see https://algolia.com/doc/api-reference/settings-api-parameters for available options
+  // can be overridden for individual indices by passing a settings object as part of the indices array:
   // indices = [{ name: `pokedex`, ..., settings: { foo: `bar` }}],
 }
 ```
@@ -96,4 +96,4 @@ export default {
 
 ## Contribute
 
-PRs are welcome but best [open an issue](https://github.com/janosh/svelte-algolia/issues/new/choose) first to discuss any changes.
+PRs are welcome but best [open an issue](https://github.com/janosh/svelte-algolia/issues/new/choose) first to discuss changes.
