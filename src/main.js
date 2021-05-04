@@ -9,7 +9,7 @@ const defaultConfig = {
 }
 
 export function deepEqual(x, y) {
-  return x && y && typeof x === 'object' && typeof x === typeof y
+  return x && y && typeof x === `object` && typeof x === typeof y
     ? Object.keys(x).length === Object.keys(y).length &&
         Object.keys(x).every((key) => deepEqual(x[key], y[key]))
     : x === y
@@ -82,17 +82,23 @@ async function callGetter(getter) {
 
 async function overwriteUpdate(index, data, client, config) {
   const { indexName: name } = index
-  const tmpIndex = client.initIndex(`${name}_tmp`)
+  try {
+    const tmpIndex = client.initIndex(`${name}_tmp`)
 
-  // copy settings from old to new index
-  const settings = await index.getSettings()
-  await tmpIndex.setSettings(settings)
+    // copy settings from old to new index
+    const settings = await index.getSettings()
+    await tmpIndex.setSettings(settings)
 
-  await tmpIndex.saveObjects(data).wait()
-  // move the tmp index to the existing index, overwrites the latter
-  await client.moveIndex(`${name}_tmp`, name).wait()
-  if (config.verbosity > 0)
-    console.log(`index '${name}': wrote ${data.length} items`)
+    await tmpIndex.saveObjects(data).wait()
+    // move the tmp index to the existing index, overwrites the latter
+    await client.moveIndex(`${name}_tmp`, name).wait()
+    if (config.verbosity > 0)
+      console.log(`index '${name}': wrote ${data.length} items`)
+  } catch (err) {
+    console.error(err)
+    // clean up by removing temporary index in case of errors
+    await client.moveIndex(`${name}_tmp`, name).wait()
+  }
 }
 
 async function partialUpdate(index, data, matchFields, config) {
@@ -151,10 +157,13 @@ async function partialUpdate(index, data, matchFields, config) {
     await index.deleteObjects(toRemove)
   }
 
-  if (!toIndex.length && !toRemove.length)
-    if (config.verbosity > 0)
+  if (config.verbosity > 0) {
+    if (toIndex.length === 0 && toRemove.length === 0) {
       console.log(`index '${name}': no updates necessary; skipping!`)
-    else if (config.verbosity > 0) console.log(`index '${name}': done updating`)
+    } else {
+      console.log(`index '${name}': done updating`)
+    }
+  }
 }
 
 // Fetches all records for the current index from Algolia

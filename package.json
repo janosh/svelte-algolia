@@ -1,9 +1,7 @@
 {
   "name": "svelte-algolia",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Algolia plugin for Svelte",
-  "main": "src/index.js",
-  "module": "src/main.js",
   "repository": "https://github.com/janosh/svelte-algolia",
   "homepage": "https://github.com/janosh/svelte-algolia#readme",
   "bugs": {
@@ -11,19 +9,20 @@
   },
   "author": "Janosh Riebesell",
   "license": "MIT",
+  "type": "module",
+  "module": "src/main.js",
   "dependencies": {
-    "algoliasearch": "^4.5.1",
-    "esm": "^3.2.25"
+    "algoliasearch": "^4.9.1"
   },
   "devDependencies": {
-    "ava": "^3.13.0",
-    "dotenv": "^8.2.0",
-    "eslint": "^7.12.1",
-    "prettier": "^2.1.2"
+    "ava": "^3.15.0",
+    "dotenv": "^8.5.0",
+    "eslint": "^7.25.0",
+    "prettier": "^2.2.1"
   },
   "scripts": {
-    "test": "ava --timeout=2m",
-    "prepublishOnly": "ava"
+    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
+    "prepublishOnly": "yarn test"
   },
   "files": [
     "src"
