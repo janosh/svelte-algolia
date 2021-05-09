@@ -1,38 +1,21 @@
 {
   "name": "svelte-algolia",
-  "version": "0.1.7",
-  "description": "Algolia plugin for Svelte",
+  "description": "Svelte Algolia server-side index updater and client-side search component",
+  "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
+  "homepage": "https://svelte-algolia.netlify.app",
   "repository": "https://github.com/janosh/svelte-algolia",
-  "homepage": "https://github.com/janosh/svelte-algolia#readme",
-  "bugs": {
-    "url": "https://github.com/janosh/svelte-algolia/issues"
-  },
-  "author": "Janosh Riebesell",
   "license": "MIT",
+  "version": "1.0.0",
   "type": "module",
-  "module": "src/main.js",
-  "dependencies": {
-    "algoliasearch": "^4.9.1"
-  },
+  "private": true,
+  "workspaces": [
+    "package",
+    "site"
+  ],
   "devDependencies": {
-    "ava": "^3.15.0",
-    "dotenv": "^8.5.0",
     "eslint": "^7.25.0",
-    "prettier": "^2.2.1"
-  },
-  "scripts": {
-    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
-    "prepublishOnly": "yarn test"
-  },
-  "files": [
-    "src"
-  ],
-  "keywords": [
-    "algolia",
-    "plugin"
-  ],
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
+    "eslint-plugin-svelte3": "^3.2.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-svelte": "^2.2.0"
   }
 }

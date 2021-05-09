@@ -1,0 +1,34 @@
+{
+  "name": "svelte-algolia",
+  "description": "Algolia server-side index updater and client-side search component for Svelte projects",
+  "author": "Janosh Riebesell <janosh.riebesell@gmail.com>",
+  "homepage": "https://github.com/janosh/svelte-algolia#readme",
+  "repository": "https://github.com/janosh/svelte-algolia",
+  "bugs": {
+    "url": "https://github.com/janosh/svelte-algolia/issues"
+  },
+  "license": "MIT",
+  "version": "0.1.7",
+  "type": "module",
+  "svelte": "src/Search.svelte",
+  "scripts": {
+    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
+    "prepublishOnly": "yarn test"
+  },
+  "keywords": [
+    "svelte",
+    "algolia",
+    "plugin",
+    "search",
+    "server-side",
+    "client-side"
+  ],
+  "devDependencies": {
+    "algoliasearch": "^4.9.1",
+    "ava": "^3.15.0",
+    "svelte": "^3.38.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

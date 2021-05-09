@@ -1,6 +1,5 @@
 name: Tests
 
-
 on:
   workflow_dispatch:
   push:
@@ -25,7 +24,9 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
-        run: yarn
+        run: |
+          cd package
+          yarn
 
       - name: Run tests
         run: yarn test

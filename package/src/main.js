@@ -69,13 +69,13 @@ async function callGetter(getter) {
     )
 
   results.forEach((obj) => {
-    if (!obj.objectID && !obj.id)
+    if (!obj.objectID && !obj.id && !obj._id)
       console.error(
         `failed to index to svelte-algolia: ${JSON.stringify(obj, null, 2)}` +
           ` has neither an 'objectID' nor 'id' key`
       )
     // convert to string to prevent processing items with integer IDs as new in partialUpdate
-    obj.objectID = `${obj.objectID || obj.id}`
+    obj.objectID = `${obj.objectID || obj.id || obj._id}`
   })
   return results
 }

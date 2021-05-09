@@ -1,5 +1,9 @@
 # dependencies
 node_modules
 
-# secrets
-.env
+# production build
+.svelte-kit
+build
+
+# deploy config
+.netlify

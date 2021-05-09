@@ -1,0 +1,61 @@
+<script>
+  import { onMount } from 'svelte'
+
+  import Example from '../components/Example.svelte'
+  import LensIcon from '../../../package/src/SearchIcon.svelte'
+  import Readme from '../../../readme.md'
+
+  onMount(() => {
+    const div = document.querySelector(`div.hide-in-demo`)
+    div.style = 'display: none;'
+  })
+</script>
+
+<main>
+
+# ![Logo](/favicon.svg) Svelte-Algolia
+
+[![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
+[![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://www.npmjs.com/package/svelte-algolia)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
+
+Utility for server-side Algolia index updates plus a client-side search component for Svelte apps. Only adds a single dependency ([`algoliasearch`](https://npmjs.com/package/algoliasearch)) to client and server.
+
+## Live Demo
+
+This is what Svelte-Algolia integrated into a nav bar might look like. Click the <LensIcon />  icon to try it out!
+
+<Example />
+
+<br />
+
+<Readme />
+
+</main>
+
+<style>
+  h1 {
+    font-size: calc(1em + 3vw);
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 3em auto;
+    gap: 1em;
+    place-content: center;
+  }
+  span {
+    padding: 1pt 5pt;
+    border-radius: 4pt;
+    vertical-align: middle;
+    background: #0075ff;
+  }
+  ul li {
+    padding: 5pt;
+  }
+  h1 img {
+    height: 1.2em;
+    vertical-align: -10pt;
+    padding-right: 4pt;
+  }
+</style>
