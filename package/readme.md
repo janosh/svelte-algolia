@@ -1,5 +1,3 @@
-<div class="hide-in-demo">
-
 <p align="center">
   <img src="site/static/banner.svg" alt="Svelte Algolia" height=150>
 </p>
@@ -14,7 +12,7 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 > The server-side part of this package was inspired by [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
 
-</div>
+<!-- remove above in docs -->
 
 ## Usage
 
@@ -179,4 +177,4 @@ yarn
 yarn dev
 ```
 
-Note the `sed` command that changes the index name in [`site/svelte.config.js`](site/svelte.config.js) from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for this demo site while developing.
+Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for this demo site while developing.

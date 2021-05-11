@@ -42,8 +42,8 @@ if (process.env.NODE_ENV === `production`) {
 }
 
 export default {
-  extensions: [`.svelte`, `.svx`, `.md`],
-  preprocess: mdsvex({ extensions: [`.svx`, `.md`] }),
+  extensions: [`.svelte`, `.svx`],
+  preprocess: mdsvex(),
   kit: {
     adapter: adapter(),
 
