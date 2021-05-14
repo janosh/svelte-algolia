@@ -11,6 +11,8 @@
   "version": "0.2.0",
   "type": "module",
   "svelte": "src/Search.svelte",
+  "module": "src/main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
     "prepublishOnly": "yarn test"
