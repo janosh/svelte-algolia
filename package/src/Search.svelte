@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte'
-  import algoliasearch from 'algoliasearch/lite'
 
   import SearchIcon from './SearchIcon.svelte'
   import { onClickOutside } from './actions'
@@ -20,7 +19,7 @@
   let client, input, query, promise
   let hasFocus = false
 
-  onMount(() => (client = algoliasearch(appId, searchKey)))
+  onMount(() => (client = window.algoliasearch(appId, searchKey)))
 
   const processHits = (hits) =>
     hits.map((hit) => {
@@ -43,7 +42,13 @@
 
     return results.map(({ hits, index }) => ({ hits: processHits(hits), index }))
   }
+
+  const src = `https://cdn.jsdelivr.net/npm/algoliasearch@latest/dist/algoliasearch-lite.umd.js`
 </script>
+
+<svelte:head>
+  <script async defer {src}></script>
+</svelte:head>
 
 <aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
   <input
