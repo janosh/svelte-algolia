@@ -17,7 +17,8 @@
     {appId}
     {searchKey}
     indices={{ Pokedex: PokemonHit }}
-    placeholder="Search Pokedex" />
+    placeholder="Search Pokedex"
+    --hitsBgColor="black" />
 </header>
 
 <style>
@@ -36,5 +37,8 @@
   }
   a {
     color: white;
+  }
+  :global(aside.svelte-algolia h2) {
+    margin-top: 1ex;
   }
 </style>

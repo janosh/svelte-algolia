@@ -20,11 +20,13 @@ There are three steps to setting up `svelte-algolia`. First, get it from NPM, th
 
 ### Installation
 
-Install with `yarn` or `(p)npm`
+Install with `yarn`
 
 ```sh
 yarn add -D svelte-algolia
 ```
+
+or `(p)npm`
 
 ```sh
 npm i -D svelte-algolia
@@ -163,6 +165,49 @@ For example, the `PokemonHit.svelte` component on the [demo site](https://svelte
 
 Substrings in attributes matching the current search string will be wrapped in `<em>` which need the `{@html ...}` tag to be rendered correctly but can then be styled to highlight why a particular hit matches the current search string. The original value (i.e. without `<em>` tags) of every highlighted attribute is available as `hit.[attr]Orig`. See `hit.nameOrig` above.
 
+#### Styling
+
+`Search.svelte` offers the following CSS variables that can be [passed in directly as props](https://github.com/sveltejs/rfcs/pull/13):
+
+- `var(--iconColor)`
+- `var(--headingColor)`
+- `var(--inputBg)`
+- `var(--inputColor)`
+- `var(--hitsBgColor, white)`
+- `var(--hitsShadow, 0 0 2pt black)`
+
+For example:
+
+```svelte
+<Search
+  indices={{ Pages: SearchHit, Posts: SearchHit }}
+  {appId} {searchKey}
+  --hitsBgColor="var(--bodyBg)"
+  --inputColor="var(--textColor)"
+  --iconColor="var(--linkColor)" />
+```
+
+The top level element is an `aside` with class `svelte-algolia`. So you can also style the entire DOM tree below it by defining global styles like
+
+```css
+:global(aside.svelte-algolia input button svg) {
+  /* this would target the search icon */
+}
+:global(aside.svelte-algolia div.results section h2) {
+  /* this would target the heading shown above the list of results for each index */
+}
+```
+
+## Examples
+
+Some sites using `svelte-algolia` in production:
+
+- [`studenten-bilden-schueler.de`](https://studenten-bilden-schueler.de) [[code](https://github.com/sbsev/svelte-site)]
+- [`afara.foundation`](https://afara.foundation) [[code](https://github.com/janosh/afara)]
+- [`ocean-artup.eu`](https://ocean-artup.eu) [[code](https://github.com/janosh/ocean-artup)]
+
+Using `svelte-algolia` yourself? [Submit a PR](https://github.com/janosh/svelte-algolia/pulls) to add your site here!
+
 ## Want to contribute?
 
 [PRs](https://github.com/janosh/svelte-algolia/pulls) are welcome but best [open an issue](https://github.com/janosh/svelte-algolia/issues/new) first to discuss changes.
@@ -172,7 +217,7 @@ The repo is split into two workspaces, the `package` itself and the demo `site`.
 ```sh
 git clone https://github.com/janosh/svelte-algolia
 cd svelte-algolia/site
-sed -i '' 's/name: `Pokedex`/name: `Pokedex Clone`/' site/svelte.config.js
+sed -i.bak 's/name: `Pokedex`/name: `Pokedex Clone`/' site/svelte.config.js
 yarn
 yarn dev
 ```

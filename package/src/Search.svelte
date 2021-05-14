@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import algoliasearch from 'algoliasearch/lite.js'
+  import algoliasearch from 'algoliasearch/lite'
 
   import SearchIcon from './SearchIcon.svelte'
   import { onClickOutside } from './actions'
@@ -45,7 +45,7 @@
   }
 </script>
 
-<aside use:onClickOutside={() => (hasFocus = false)}>
+<aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
   <input
     type="text"
     bind:this={input}
@@ -91,7 +91,7 @@
 </aside>
 
 <style>
-  aside {
+  aside.svelte-algolia {
     position: relative;
     display: flex;
     flex-direction: row-reverse;
@@ -100,7 +100,7 @@
     align-items: center;
     padding: 0;
     grid-area: search;
-    color: var(--headerColor);
+    color: var(--iconColor);
     position: relative;
     background: transparent;
     border: none;
@@ -119,8 +119,9 @@
     right: 0;
   }
   input {
+    background: var(--inputBg);
+    color: var(--inputColor);
     font-size: 1em;
-    background: var(--bodyBg);
     border-radius: 5pt;
     border: 0;
     outline: none;
@@ -131,7 +132,6 @@
     padding: 0;
     height: 2.5ex;
     line-height: inherit;
-    color: var(--lightGray);
   }
   input.hasFocus {
     opacity: 1;
@@ -142,15 +142,16 @@
     border-radius: 3pt;
   }
   input::placeholder {
-    color: var(--lightGray);
+    color: var(--inputColor);
   }
   input.hasFocus + button {
-    color: var(--lightGray);
+    color: var(--inputColor);
   }
   div.results {
+    background-color: var(--hitsBgColor, white);
+    box-shadow: var(--hitsShadow, 0 0 2pt black);
     min-width: 15em;
     z-index: 1;
-    background: black;
     top: 3ex;
     max-height: 60vh;
     position: absolute;
@@ -158,7 +159,6 @@
     max-width: 80vw;
     overflow: auto;
     right: 0;
-    box-shadow: 0 0 1ex black;
     padding: 1ex 1em;
     border-radius: 5pt;
     overscroll-behavior: none;

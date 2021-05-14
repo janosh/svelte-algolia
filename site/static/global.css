@@ -1,6 +1,3 @@
-:root {
-  --blue: #0461cc;
-}
 body {
   background: #090019;
   padding: 2em;
@@ -14,7 +11,7 @@ main {
   margin-bottom: 3em;
 }
 a {
-  color: var(--blue);
+  color: cornflowerblue;
   text-decoration: none;
 }
 a:hover {
@@ -40,4 +37,7 @@ blockquote {
   padding: 1px 8pt;
   background: rgba(255, 255, 255, 0.2);
   margin: 1em 0;
+}
+:is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 2em;
 }
