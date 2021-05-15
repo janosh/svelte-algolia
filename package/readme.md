@@ -14,11 +14,9 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 <!-- remove above in docs -->
 
-## Usage
-
 There are three steps to setting up `svelte-algolia`. First, get it from NPM, then setup your server-side index updates and finally integrate the client-side search component into your UI.
 
-### Installation
+## Installation
 
 Install with `yarn`
 
@@ -32,7 +30,7 @@ or `(p)npm`
 npm i -D svelte-algolia
 ```
 
-### Server Side
+## Server Side
 
 1. Create an `algoliaConfig` object:
 
@@ -71,7 +69,7 @@ npm i -D svelte-algolia
 
    You can call this function wherever you'd like to update your indices. Typically, you would include this in every production build of your app.
 
-#### Config Options
+### Config Options
 
 ```js
 const defaultConfig = {
@@ -90,7 +88,7 @@ const defaultConfig = {
 }
 ```
 
-#### Auto-update Indices during Builds
+### Auto-update Indices during Builds
 
 To use this package as part of a build process (e.g. in a [SvelteKit](https://kit.svelte.dev) app), simply call `indexAlgolia` in your build config:
 
@@ -106,7 +104,7 @@ const algoliaConfig = {
 if (process.env.NODE_ENV === `production`) indexAlgolia(algoliaConfig)
 ```
 
-### Client Side
+## Client Side
 
 `<Search />` needs your Algolia app's ID and search key to access its search indices as well as a mapping from index to corresponding Svelte-component that should render hits (items matching searches in that index). Each hit component receives a `hit` object as prop with all attributes stored in the Algolia index.
 
@@ -165,7 +163,42 @@ For example, the `PokemonHit.svelte` component on the [demo site](https://svelte
 
 Substrings in attributes matching the current search string will be wrapped in `<em>` which need the `{@html ...}` tag to be rendered correctly but can then be styled to highlight why a particular hit matches the current search string. The original value (i.e. without `<em>` tags) of every highlighted attribute is available as `hit.[attr]Orig`. See `hit.nameOrig` above.
 
-#### Styling
+### Props
+
+Full list of props/bindable variables for this component:
+
+| name            | default                                                                       | description                                                                                                                                                                  |
+| :-------------- | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appId`         | `String!`                                                                     | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                            |
+| `searchKey`     | `String!`                                                                     | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                 |
+| `indices`       | `{indexName: Component}`                                                      | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.               |
+| `loadingStr`    | `'Searching...'`                                                              | String to display in the results pane while Search results are being fetched.                                                                                                |
+| `noResultMsg`   | ``(query) => `No results for '${query}'` ``                                   | Function that returns the string to display when search returned no results.                                                                                                 |
+| `resultCounter` | ```(hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : `` ``` | Function that returns a string which wll be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
+| `placeholder`   | `'Search'`                                                                    | Placeholder shown in the text input before user starts typing.                                                                                                               |
+| `ariaLabel`     | `'Search'`                                                                    | Tells assistive technology how to announce the input element to the user.                                                                                                    |
+| `hasFocus`      | `false`                                                                       | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                      |
+
+### Events
+
+`Search.svelte` listens for `on:close` events on every hit component it renders and will set `hasFocus` to `false` to close itself when received. You can use this e.g. to close the search interface when the user clicks on a link in one of the search results and navigates to a different page on your site:
+
+```svelte
+<script>
+  import { createEventDispatcher } from 'svelte'
+
+  export let hit
+
+  const dispatch = createEventDispatcher()
+</script>
+
+<h3>
+  <a href={hit.slug} on:click={() => dispatch(`close`)}>{@html hit.title}</a>
+</h3>
+<p>{@html hit.body}</p>
+```
+
+### Styling
 
 `Search.svelte` offers the following CSS variables that can be [passed in directly as props](https://github.com/sveltejs/rfcs/pull/13):
 

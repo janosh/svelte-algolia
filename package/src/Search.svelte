@@ -7,17 +7,17 @@
   export let appId, searchKey, indices
   export let loadingStr = `Searching...`
   export let noResultMsg = (query) => `No results for '${query}'`
-  export let resultReporter = (hits) =>
+  export let resultCounter = (hits) =>
     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
   export let placeholder = `Search`
   export let ariaLabel = `Search`
+  export let hasFocus = false
 
   for (let [key, val] of Object.entries({ appId, searchKey, indices })) {
     if (!val) console.error(`Invalid ${key}: ${val}`)
   }
 
   let client, input, query, promise
-  let hasFocus = false
 
   onMount(() => (client = window.algoliasearch(appId, searchKey)))
 
@@ -81,10 +81,13 @@
               <section>
                 <h2>
                   {index}
-                  {@html resultReporter(hits)}
+                  {@html resultCounter(hits)}
                 </h2>
                 {#each hits as hit (hit.objectID)}
-                  <svelte:component this={indices[index]} {hit} />
+                  <svelte:component
+                    this={indices[index]}
+                    {hit}
+                    on:close={() => (hasFocus = false)} />
                 {/each}
               </section>
             {/if}

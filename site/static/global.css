@@ -6,7 +6,7 @@ body {
   color: #eee;
 }
 main {
-  max-width: 45em;
+  max-width: 50em;
   margin: auto;
   margin-bottom: 3em;
 }
@@ -40,4 +40,16 @@ blockquote {
 }
 :is(h1, h2, h3, h4, h5, h6) {
   margin-top: 2em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table :is(td, th) {
+  border: 1px solid gray;
+  padding: 0.4em 0.8em;
+}
+tbody tr:nth-child(odd) {
+  background: black;
 }
