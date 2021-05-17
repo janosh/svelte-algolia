@@ -4,6 +4,8 @@
 
   import { page } from '$app/stores'
 
+  import { onClickOutside } from '../../../package/src/actions'
+
   // the default selector relies on BasePage.svelte wrapping body content in <article>
   export let headingSelector = Array.from({ length: 6 }, (_, i) => `main h` + (i + 1))
   export let getTitle = (node) => node.innerText
@@ -31,7 +33,7 @@
 
   let windowWidth
   let open = false
-  let activeHeading = false
+  let activeHeading = undefined
   let headings = []
   let nodes = []
   const scrollHandler = throttle(() => {
@@ -63,15 +65,15 @@
 
 <svelte:window on:scroll={scrollHandler} bind:innerWidth={windowWidth} />
 
-<aside>
-  <button on:click={() => (open = !open)} aria-label="Inhaltsverzeichnis öffnen">
-    {#if open}
-      Close
-    {:else}
+<aside use:onClickOutside={() => (open = false)}>
+  {#if !open}
+    <button
+      on:click|preventDefault={() => (open = !open)}
+      aria-label="Open table of contents">
       Contents
-    {/if}
-  </button>
-  {#if open || windowWidth > 1600}
+    </button>
+  {/if}
+  {#if open || windowWidth > 1000}
     <nav transition:blur>
       <h2>Contents</h2>
       {#each headings as { title, depth }, idx}
@@ -103,27 +105,34 @@
   nav > li {
     margin-top: 5pt;
     cursor: pointer;
-    color: var(--linkColor);
+  }
+  nav > li:hover {
+    color: cornflowerblue;
   }
   nav > li.active {
-    color: var(--darkGreen);
+    color: orange;
   }
   button {
-    color: var(--linkColor);
-    display: flex;
-    background: var(--accentBg);
-    border-radius: 50%;
-    padding: 2pt;
-    box-shadow: 0 0 1em -3pt var(--shadow);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    cursor: pointer;
+    background-color: cornflowerblue;
+    border-radius: 3pt;
+    padding: 2pt 4pt;
     border: none;
+    color: white;
+    font-size: 2ex;
   }
   nav {
-    position: absolute;
     margin: 1em 0;
     padding: 5pt 1ex 1ex 1.5ex;
-    border-radius: 6pt;
   }
-  @media (max-width: 1600px) {
+  nav > h2 {
+    margin-top: 0;
+  }
+  @media (max-width: 1000px) {
     /* mobile styles */
     aside {
       position: fixed;
@@ -135,21 +144,18 @@
       bottom: -1em;
       right: 0;
       z-index: -1;
-      background: var(--accentBg);
-      box-shadow: 0 0 1em -3pt var(--shadow);
-      margin: 2em 1em;
+      background-color: black;
+      margin: 0 1em;
     }
   }
-  @media (min-width: 1601px) {
+  @media (min-width: 1001px) {
     /* desktop styles */
     aside {
-      position: sticky;
-      top: 7ex;
+      margin-top: 10em;
     }
     nav {
-      left: calc(100% + 2ex);
-      width: 16vw;
-      background: var(--transparent);
+      position: sticky;
+      top: 1em;
     }
     aside > button {
       display: none;

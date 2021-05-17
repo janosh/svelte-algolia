@@ -4,6 +4,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   margin: auto;
   color: #eee;
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
 }
 main {
   max-width: 50em;
@@ -21,6 +24,7 @@ code {
   padding: 1pt 3pt;
   border-radius: 3pt;
   font-size: 1.3em;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 pre code {
   background-color: transparent;

@@ -6,9 +6,9 @@
   import Docs from '../docs.svx'
 </script>
 
-<main>
-
 <Toc headingSelector={Array.from({ length: 5 }, (_, i) => `main h` + (i + 2))} />
+
+<main>
 
 # ![Logo](/favicon.svg) Svelte-Algolia
 
