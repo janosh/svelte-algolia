@@ -7,11 +7,16 @@ body {
   display: flex;
   max-width: 1000px;
   margin: auto;
+  line-height: 3ex;
 }
 main {
   max-width: 50em;
   margin: auto;
   margin-bottom: 3em;
+  width: 100%;
+}
+ul li {
+  margin: 1ex 0;
 }
 a {
   color: cornflowerblue;

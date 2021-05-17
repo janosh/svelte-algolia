@@ -5,6 +5,7 @@
   import { page } from '$app/stores'
 
   import { onClickOutside } from '../../../package/src/actions'
+  import MenuIcon from './MenuIcon.svelte'
 
   // the default selector relies on BasePage.svelte wrapping body content in <article>
   export let headingSelector = Array.from({ length: 6 }, (_, i) => `main h` + (i + 1))
@@ -70,7 +71,7 @@
     <button
       on:click|preventDefault={() => (open = !open)}
       aria-label="Open table of contents">
-      Contents
+      <MenuIcon width="1em" />
     </button>
   {/if}
   {#if open || windowWidth > 1000}
@@ -118,12 +119,13 @@
     right: 0;
     z-index: 2;
     cursor: pointer;
-    background-color: cornflowerblue;
-    border-radius: 3pt;
+    font-size: 2em;
+    line-height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5pt;
     padding: 2pt 4pt;
     border: none;
     color: white;
-    font-size: 2ex;
   }
   nav {
     margin: 1em 0;

@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
 
   import SearchIcon from './SearchIcon.svelte'
   import { onClickOutside } from './actions'
@@ -12,6 +12,8 @@
   export let placeholder = `Search`
   export let ariaLabel = `Search`
   export let hasFocus = false
+
+  const dispatch = createEventDispatcher()
 
   for (let [key, val] of Object.entries({ appId, searchKey, indices })) {
     if (!val) console.error(`Invalid ${key}: ${val}`)
@@ -56,6 +58,7 @@
     bind:this={input}
     bind:value={query}
     on:keyup={() => (promise = search())}
+    on:focus={() => dispatch(`focus`)}
     {placeholder}
     aria-label={ariaLabel}
     class:hasFocus />

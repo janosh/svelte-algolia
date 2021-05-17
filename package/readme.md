@@ -181,7 +181,7 @@ Full list of props/bindable variables for this component:
 
 ### Events
 
-`Search.svelte` listens for `on:close` events on every hit component it renders and will set `hasFocus` to `false` to close itself when received. You can use this e.g. to close the search interface when the user clicks on a link in one of the search results and navigates to a different page on your site:
+`Search.svelte` listens for **`on:close`** events on every hit component it renders and will set `hasFocus` to `false` to close itself when received. You can use this e.g. to close the search interface when the user clicks on a link in one of the search results and navigates to a different page on your site:
 
 ```svelte
 <script>
@@ -196,6 +196,12 @@ Full list of props/bindable variables for this component:
   <a href={hit.slug} on:click={() => dispatch(`close`)}>{@html hit.title}</a>
 </h3>
 <p>{@html hit.body}</p>
+```
+
+It also emits a **`focus`** event every the user clicks the search icon and focus enters the text input.
+
+```svelte
+<Search on:focus={() => console.log("Let's search!")} />
 ```
 
 ### Styling
