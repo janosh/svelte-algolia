@@ -8,7 +8,7 @@
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://www.npmjs.com/package/svelte-algolia)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
 
-Utility for server-side Algolia index updates plus a client-side search component for Svelte apps. Only adds a single dependency on client and server: [`algoliasearch`](https://npmjs.com/package/algoliasearch).
+Utility for server-side Algolia index updates plus a client-side search component for Svelte apps. Only adds a single dependency on server and client: [`algoliasearch`](https://npmjs.com/package/algoliasearch)/[`algoliasearch/lite`](https://algolia.com/doc/api-client/getting-started/install/javascript?client=javascript#explanation-of-different-builds) (13 KB).
 
 > The server-side part of this package was inspired by [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
 
@@ -37,9 +37,9 @@ npm i -D svelte-algolia
    ```js
    import 'dotenv/config' // optional
 
-   function loadPokedex() {
-     const json = fs.readFileSync(`../package/tests/fixtures/pokedex.json`, `utf8`)
-     return JSON.parse(json).map(el => ({ ...el, id: el.someUniqAttribute }))
+   async function loadPokedex() {
+     const json = await import('pokedex.json')
+     return json.default.map(el => ({ ...el, id: el.someUniqAttribute }))
    }
 
    const algoliaConfig = {
@@ -206,7 +206,7 @@ It also emits a **`focus`** event every the user clicks the search icon and focu
 
 ### Styling
 
-`Search.svelte` offers the following CSS variables that can be [passed in directly as props](https://github.com/sveltejs/rfcs/pull/13):
+`Search.svelte` offers the following CSS variables listed here with their defaults (if any) that can be [passed in directly as props](https://github.com/sveltejs/rfcs/pull/13):
 
 - `var(--iconColor)`
 - `var(--headingColor)`
@@ -258,7 +258,7 @@ git clone https://github.com/janosh/svelte-algolia
 cd svelte-algolia/site
 sed -i.bak 's/name: `Pokedex`/name: `Pokedex Clone`/' site/svelte.config.js
 yarn
-yarn dev
+yarn workspace site dev
 ```
 
 Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for this demo site while developing.

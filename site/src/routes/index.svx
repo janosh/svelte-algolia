@@ -1,12 +1,13 @@
 <script>
+  import Toc from 'svelte-toc'
+
   import Example from '../components/Example.svelte'
-  import Toc from '../components/Toc.svelte'
 
   import LensIcon from '../../../package/src/SearchIcon.svelte'
   import Docs from '../docs.svx'
 </script>
 
-<Toc headingSelector={Array.from({ length: 5 }, (_, i) => `main h` + (i + 2))} />
+<Toc headingSelector={[...Array(5).keys()].map((i) => `main h${i + 2}`)} --toc-mobile-bg-color="black" --toc-mobile-btn-color="white" --toc-desktop-margin="11em 0 0 0" />
 
 <main>
 
