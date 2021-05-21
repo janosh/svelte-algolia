@@ -1,5 +1,8 @@
+:root {
+  --body-bg: #090019;
+}
 body {
-  background: #090019;
+  background: var(--body-bg);
   padding: 2em;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   margin: auto;

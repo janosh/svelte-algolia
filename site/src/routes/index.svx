@@ -2,12 +2,15 @@
   import Toc from 'svelte-toc'
 
   import Example from '../components/Example.svelte'
+  import GitHubCorner from '../components/GitHubCorner.svelte'
 
   import LensIcon from '../../../package/src/SearchIcon.svelte'
   import Docs from '../docs.svx'
 </script>
 
 <Toc headingSelector={[...Array(5).keys()].map((i) => `main h${i + 2}`)} --toc-mobile-bg-color="black" --toc-mobile-btn-color="white" --toc-desktop-margin="11em 0 0 0" />
+
+<GitHubCorner href="https://github.com/janosh/svelte-algolia" --ghc-color="var(--body-bg)" --ghc-bg="white" />
 
 <main>
 
