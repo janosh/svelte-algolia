@@ -38,6 +38,9 @@ This is what Svelte-Algolia integrated into a nav bar might look like. Click the
   h1 {
     font-size: calc(1em + 3vw);
   }
+  h1 > a {
+    display: none;
+  }
   .controls {
     display: flex;
     flex-wrap: wrap;
