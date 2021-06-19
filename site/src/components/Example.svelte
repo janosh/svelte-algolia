@@ -10,10 +10,10 @@
 
 <header>
   <nav>
-    <a href=".">About</a>
-    <a href=".">Contact</a>
     <a href=".">Fake</a>
     <a href=".">Links</a>
+    <a href=".">In</a>
+    <a href=".">Nav</a>
   </nav>
   <div>
     {#if !searchEverFocused}

@@ -20,6 +20,9 @@ main {
   margin-bottom: 3em;
   width: 100%;
 }
+* {
+  scroll-margin-top: 50px;
+}
 ul li {
   margin: 1ex 0;
 }
@@ -54,6 +57,10 @@ blockquote {
 }
 :is(h2, h3, h4, h5, h6) {
   margin-top: 2em;
+  transition: 0.3s;
+}
+.toc-clicked {
+  color: cornflowerblue;
 }
 
 table {
