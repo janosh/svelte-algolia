@@ -1,12 +1,10 @@
-import { config as loadEnv } from 'dotenv'
+import 'dotenv/config'
 import test from 'ava'
 import algoliasearch from 'algoliasearch'
 
 // data from https://git.io/J3hvR
 import pokedex from './fixtures/pokedex.json'
-import { indexAlgolia } from '../src/main.js'
-
-loadEnv({ path: `../.env` })
+import { indexAlgolia } from '../src/lib/main.js'
 
 const { ALGOLIA_APP_ID: appId, ALGOLIA_ADMIN_KEY: apiKey } = process.env
 const client = algoliasearch(appId, apiKey)

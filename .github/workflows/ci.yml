@@ -18,16 +18,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Setup Node
+      - name: Setup Node v16
         uses: actions/setup-node@v2
         with:
           node-version: '16'
 
       - name: Install dependencies
-        run: yarn workspace svelte-algolia install
+        run: yarn
 
       - name: Run tests
-        run: yarn workspace svelte-algolia test
+        run: yarn test
         env:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY: ${{ secrets.ALGOLIA_SEARCH_KEY }}

@@ -59,9 +59,6 @@ blockquote {
   margin-top: 2em;
   transition: 0.3s;
 }
-.toc-clicked {
-  color: cornflowerblue;
-}
 
 table {
   border-collapse: collapse;

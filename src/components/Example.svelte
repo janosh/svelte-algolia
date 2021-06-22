@@ -1,6 +1,6 @@
 <script>
   import { session } from '$app/stores'
-  import Search from '../../../package/src/Search.svelte'
+  import Search from '../lib/Search.svelte'
   import PokemonHit from '../components/PokemonHit.svelte'
 
   const { ALGOLIA_APP_ID: appId, ALGOLIA_SEARCH_KEY: searchKey } = $session

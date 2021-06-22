@@ -1,7 +1,7 @@
-import { config } from 'dotenv'
+import 'dotenv/config'
 import adapter from '@sveltejs/adapter-static'
 import { mdsvex } from 'mdsvex'
-import { indexAlgolia } from '../package/src/main.js'
+import { indexAlgolia } from './src/lib/main.js'
 import fs from 'fs'
 
 import headingSlugs from 'rehype-slug'
@@ -17,18 +17,16 @@ const rehypePlugins = [
       content: s(
         `svg`,
         { width: 16, height: 16, viewBox: `0 0 16 16` },
-        // symbol #link-icon defined in app.html
-        s(`use`, { 'xlink:href': `#link-icon` })
+        // symbol #octicon-link defined in app.html
+        s(`use`, { 'xlink:href': `#octicon-link` })
       ),
     },
   ],
 ]
 
-config({ path: `../.env` })
-
 function loadJsonPokedex() {
   // each pokemon already has an ID so no need to create objectID for algolia
-  const json = fs.readFileSync(`../package/tests/fixtures/pokedex.json`, `utf8`)
+  const json = fs.readFileSync(`tests/fixtures/pokedex.json`, `utf8`)
   return JSON.parse(json)
 }
 
