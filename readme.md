@@ -64,7 +64,7 @@ npm i -D svelte-algolia
 2. Pass your config to `indexAlgolia`:
 
    ```js
-   import { indexAlgolia } from 'svelte-algolia'
+   import { indexAlgolia } from 'svelte-algolia/main.js'
 
    indexAlgolia(algoliaConfig)
    ```
@@ -96,7 +96,7 @@ To use this package as part of a build process (e.g. in a [SvelteKit](https://ki
 
 ```js
 // svelte.config.js
-import { indexAlgolia } from 'svelte-algolia'
+import { indexAlgolia } from 'svelte-algolia/main.js'
 
 const algoliaConfig = {
   // see above
@@ -260,7 +260,7 @@ git clone https://github.com/janosh/svelte-algolia
 cd svelte-algolia
 sed -i.bak 's/name: `Pokedex`/name: `Pokedex Clone`/' svelte.config.js
 yarn
-yarn workspace site dev
+yarn dev
 ```
 
 Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for [this demo site](https://svelte-algolia.netlify.app) while developing.
