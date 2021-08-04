@@ -4,7 +4,7 @@
   import Example from '../components/Example.svelte'
   import GitHubCorner from '../components/GitHubCorner.svelte'
 
-  import LensIcon from '../lib/SearchIcon.svelte'
+  import SearchIcon from '../lib/SearchIcon.svelte'
   import Docs from '../docs.svx'
 </script>
 
@@ -24,7 +24,7 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 ## Live Demo
 
-This is what Svelte-Algolia integrated into a nav bar might look like. Click the <LensIcon />  icon to try it out!
+This is what Svelte-Algolia integrated into a nav bar might look like. Click the <SearchIcon />  icon to try it out!
 
 <Example />
 

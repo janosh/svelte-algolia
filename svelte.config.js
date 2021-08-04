@@ -1,8 +1,10 @@
 import 'dotenv/config'
-import adapter from '@sveltejs/adapter-static'
-import { mdsvex } from 'mdsvex'
 import { indexAlgolia } from './src/lib/main.js'
 import fs from 'fs'
+
+import adapter from '@sveltejs/adapter-static'
+import { mdsvex } from 'mdsvex'
+import preprocess from "svelte-preprocess"
 
 import headingSlugs from 'rehype-slug'
 import linkHeadings from 'rehype-autolink-headings'
@@ -61,7 +63,7 @@ if (process.env.NODE_ENV === `production`) {
 
 export default {
   extensions: [`.svelte`, `.svx`],
-  preprocess: mdsvex({ rehypePlugins }),
+  preprocess: [preprocess(), mdsvex({ rehypePlugins })],
   kit: {
     adapter: adapter(),
 

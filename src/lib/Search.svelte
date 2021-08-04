@@ -1,13 +1,19 @@
-<script>
-  import { onMount, createEventDispatcher } from 'svelte'
+<script lang="ts">
+  import { onMount, createEventDispatcher, SvelteComponent } from 'svelte'
+  import algoliasearch, { SearchClient } from 'algoliasearch/lite'
 
   import SearchIcon from './SearchIcon.svelte'
   import { onClickOutside } from './actions'
+  import type { Hit } from '@algolia/client-search'
 
-  export let appId, searchKey, indices
+  type SearchHit = Hit<Record<string, unknown>>
+
+  export let appId: string
+  export let searchKey: string
+  export let indices: Record<string, typeof SvelteComponent>
   export let loadingStr = `Searching...`
-  export let noResultMsg = (query) => `No results for '${query}'`
-  export let resultCounter = (hits) =>
+  export let noResultMsg = (query: string): string => `No results for '${query}'`
+  export let resultCounter = (hits: SearchHit[]): string =>
     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
   export let placeholder = `Search`
   export let ariaLabel = `Search`
@@ -19,12 +25,15 @@
     if (!val) console.error(`Invalid ${key}: ${val}`)
   }
 
-  let client, input, query, promise
+  let client: SearchClient
+  let input: HTMLInputElement
+  let query = ``
+  let promise: Promise<{ index: string | undefined; hits: SearchHit[] }[]>
 
-  onMount(() => (client = window.algoliasearch(appId, searchKey)))
+  onMount(() => (client = algoliasearch(appId, searchKey)))
 
-  const processHits = (hits) =>
-    hits.map((hit) => {
+  function processHits(hits: SearchHit[]) {
+    return hits.map((hit) => {
       for (const [key, val] of Object.entries(hit)) {
         if (key.endsWith(`Orig`)) continue
         const processedVal =
@@ -36,25 +45,20 @@
       }
       return hit
     })
+  }
 
   async function search() {
-    const { results } = await client.multipleQueries(
+    const { results } = await client.search(
       Object.keys(indices).map((indexName) => ({ indexName, query }))
     )
 
     return results.map(({ hits, index }) => ({ hits: processHits(hits), index }))
   }
-
-  const src = `https://cdn.jsdelivr.net/npm/algoliasearch@latest/dist/algoliasearch-lite.umd.js`
 </script>
-
-<svelte:head>
-  <script async defer {src}></script>
-</svelte:head>
 
 <aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
   <input
-    type="text"
+    type=":stringtext"
     bind:this={input}
     bind:value={query}
     on:keyup={() => (promise = search())}
@@ -69,7 +73,7 @@
     }}
     title={ariaLabel}>
     <SearchIcon
-      alt="Search Icon"
+      ariaLabel="Search Icon"
       height="{hasFocus ? 1.9 : 2.3}ex"
       style="cursor: pointer;" />
   </button>
