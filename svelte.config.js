@@ -15,6 +15,7 @@ const rehypePlugins = [
   [
     linkHeadings,
     {
+      test: [`h2`, `h3`, `h4`, `h5`, `h6`], // don't auto-link <h1>
       behavior: `append`,
       content: s(
         `svg`,

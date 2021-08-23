@@ -46,8 +46,4 @@ This is what Svelte-Algolia integrated into a nav bar might look like. Click the
     vertical-align: -10pt;
     padding-right: 4pt;
   }
-  /* tells svelte-toc how to highlight clicked headings */
-  :global(.toc-clicked) {
-    color: cornflowerblue;
-  }
 </style>
