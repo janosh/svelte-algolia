@@ -9,7 +9,9 @@ export function getSession(): Record<string, string> {
     }
   }
 
-  const session = Object.fromEntries(keys.map((key) => [key, process.env[key] as string]))
+  const session = Object.fromEntries(
+    keys.map((key) => [key, process.env[key] as string])
+  )
 
   return session
 }

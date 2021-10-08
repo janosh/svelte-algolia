@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, createEventDispatcher, SvelteComponent } from 'svelte'
-  import algoliasearch, { SearchClient } from 'algoliasearch/lite'
+  import algoliasearch, { SearchClient } from 'algoliasearch/lite.js'
 
   import SearchIcon from './SearchIcon.svelte'
   import { onClickOutside } from './actions'

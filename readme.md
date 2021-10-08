@@ -16,23 +16,13 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 <!-- remove above in docs -->
 
-There are three steps to setting up `svelte-algolia`. First, get it from NPM, then setup your server-side index updates and finally integrate the client-side search component into your UI.
+There are three steps to setting up `svelte-algolia`:
 
-## Installation
+1. `npm i -D svelte-algolia`
+2. Setup your [server-side index updates](#2-server-side-index-updates).
+3. Integrate the [client-side search component](#3-client-side-ui) into your UI.
 
-Install with `yarn`
-
-```sh
-yarn add -D svelte-algolia
-```
-
-or `(p)npm`
-
-```sh
-npm i -D svelte-algolia
-```
-
-## Server Side
+## 2. Server-Side Index Updates
 
 1. Create an `algoliaConfig` object:
 
@@ -41,7 +31,7 @@ npm i -D svelte-algolia
 
    async function loadPokedex() {
      const json = await import('pokedex.json')
-     return json.default.map(el => ({ ...el, id: el.someUniqAttribute }))
+     return json.default.map((el) => ({ ...el, id: el.someUniqAttribute }))
    }
 
    const algoliaConfig = {
@@ -51,9 +41,9 @@ npm i -D svelte-algolia
        { name: `Pokedex`, getData: loadPokedex },
        { name: `Hitchhiker's Guide`, getData: guideLoader },
      ],
-    settings: {
-      attributesToHighlight: [`name`],
-    },
+     settings: {
+       attributesToHighlight: [`name`],
+     },
    }
    ```
 
@@ -106,7 +96,7 @@ const algoliaConfig = {
 if (process.env.NODE_ENV === `production`) indexAlgolia(algoliaConfig)
 ```
 
-## Client Side
+## 3. Client Side UI
 
 `<Search />` needs your Algolia app's ID and search key to access its search indices as well as a mapping from index to corresponding Svelte-component that should render hits (items matching searches in that index). Each hit component receives a `hit` object as prop with all attributes stored in the Algolia index.
 
@@ -169,17 +159,17 @@ Substrings in attributes matching the current search string will be wrapped in `
 
 Full list of props/bindable variables for this component:
 
-| name            | default                                                                       | description                                                                                                                                                                  |
-| :-------------- | :---------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appId`         | `String!`                                                                     | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                            |
-| `searchKey`     | `String!`                                                                     | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                 |
-| `indices`       | `{indexName: Component, ...}`                                                 | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.               |
-| `loadingStr`    | `'Searching...'`                                                              | String to display in the results pane while Search results are being fetched.                                                                                                |
-| `noResultMsg`   | ``(query) => `No results for '${query}'` ``                                   | Function that returns the string to display when search returned no results.                                                                                                 |
-| `resultCounter` | ```(hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : `` ``` | Function that returns a string which wll be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
-| `placeholder`   | `'Search'`                                                                    | Placeholder shown in the text input before user starts typing.                                                                                                               |
-| `ariaLabel`     | `'Search'`                                                                    | Tells assistive technology how to announce the input element to the user.                                                                                                    |
-| `hasFocus`      | `false`                                                                       | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                      |
+| name            | default                                                                         | description                                                                                                                                                                  |
+| :-------------- | :------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appId`         | `String!`                                                                       | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                            |
+| `searchKey`     | `String!`                                                                       | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                 |
+| `indices`       | `{indexName: Component, ...}`                                                   | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.               |
+| `loadingStr`    | `'Searching...'`                                                                | String to display in the results pane while Search results are being fetched.                                                                                                |
+| `noResultMsg`   | `` (query) => `No results for '${query}'`  ``                                   | Function that returns the string to display when search returned no results.                                                                                                 |
+| `resultCounter` | ``` (hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``  ``` | Function that returns a string which wll be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
+| `placeholder`   | `'Search'`                                                                      | Placeholder shown in the text input before user starts typing.                                                                                                               |
+| `ariaLabel`     | `'Search'`                                                                      | Tells assistive technology how to announce the input element to the user.                                                                                                    |
+| `hasFocus`      | `false`                                                                         | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                      |
 
 ### Events
 
@@ -222,7 +212,8 @@ For example:
 ```svelte
 <Search
   indices={{ Pages: SearchHit, Posts: SearchHit }}
-  {appId} {searchKey}
+  {appId}
+  {searchKey}
   --hitsBgColor="var(--bodyBg)"
   --inputColor="var(--textColor)"
   --iconColor="var(--linkColor)" />
@@ -259,8 +250,8 @@ The app ID and search key `.env` were intentionally committed so you can clone t
 git clone https://github.com/janosh/svelte-algolia
 cd svelte-algolia
 sed -i.bak 's/name: `Pokedex`/name: `Pokedex Clone`/' svelte.config.js
-yarn
-yarn dev
+npm install
+npm run dev
 ```
 
 Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for [this demo site](https://svelte-algolia.netlify.app) while developing.
