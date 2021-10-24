@@ -5,6 +5,7 @@
 # Svelte Algolia
 
 [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/main.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/main)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
 
@@ -159,17 +160,18 @@ Substrings in attributes matching the current search string will be wrapped in `
 
 Full list of props/bindable variables for this component:
 
-| name            | default                                                                         | description                                                                                                                                                                  |
-| :-------------- | :------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appId`         | `String!`                                                                       | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                            |
-| `searchKey`     | `String!`                                                                       | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                 |
-| `indices`       | `{indexName: Component, ...}`                                                   | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.               |
-| `loadingStr`    | `'Searching...'`                                                                | String to display in the results pane while Search results are being fetched.                                                                                                |
-| `noResultMsg`   | `` (query) => `No results for '${query}'`  ``                                   | Function that returns the string to display when search returned no results.                                                                                                 |
-| `resultCounter` | ``` (hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``  ``` | Function that returns a string which wll be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
-| `placeholder`   | `'Search'`                                                                      | Placeholder shown in the text input before user starts typing.                                                                                                               |
-| `ariaLabel`     | `'Search'`                                                                      | Tells assistive technology how to announce the input element to the user.                                                                                                    |
-| `hasFocus`      | `false`                                                                         | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                      |
+<!-- prettier-ignore -->
+| name            | default                                                                       | description                                                                                                                                                                   |
+| :-------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appId`         | `String!`                                                                     | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                             |
+| `searchKey`     | `String!`                                                                     | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                  |
+| `indices`       | `{indexName: Component, ...}`                                                 | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.                |
+| `loadingStr`    | `'Searching...'`                                                              | String to display in the results pane while Search results are being fetched.                                                                                                 |
+| `noResultMsg`   | ``(query) => `No results for '${query}'` ``                                   | Function that returns the string to display when search returned no results.                                                                                                  |
+| `resultCounter` | ```(hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : `` ``` | Function that returns a string which will be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
+| `placeholder`   | `'Search'`                                                                    | Placeholder shown in the text input before user starts typing.                                                                                                                |
+| `ariaLabel`     | `'Search'`                                                                    | Tells assistive technology how to announce the input element to the user.                                                                                                     |
+| `hasFocus`      | `false`                                                                       | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                       |
 
 ### Events
 
