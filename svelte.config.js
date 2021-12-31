@@ -55,7 +55,11 @@ const algoliaConfig = {
   },
 }
 
-if (process.env.NODE_ENV === `production`) {
+if (
+  process.env.NODE_ENV === `production` &&
+  fs.existsSync(`./package/main.js`)
+) {
+  const { indexAlgolia } = await import(`./package/main.js`)
   indexAlgolia(algoliaConfig)
 }
 
@@ -67,9 +71,5 @@ export default {
 
     // hydrate the <body> element in src/app.html
     target: `#svelte`,
-
-    vite: {
-      ssr: { noExternal: [`svelte-toc`] },
-    },
   },
 }

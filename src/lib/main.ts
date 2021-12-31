@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
-import algoliasearch from 'algoliasearch'
+import type {
+  ObjectWithObjectID,
+  Settings as IndexSettings,
+} from '@algolia/client-search'
+import algoliasearch, { SearchClient, SearchIndex } from 'algoliasearch'
 
 const defaultConfig = {
   partialUpdates: false,
@@ -8,16 +12,50 @@ const defaultConfig = {
   settings: {},
 }
 
-export function deepEqual(x, y) {
-  return x && y && typeof x === `object` && typeof x === typeof y
-    ? Object.keys(x).length === Object.keys(y).length &&
-        Object.keys(x).every((key) => deepEqual(x[key], y[key]))
-    : x === y
+export type IndexConfig = {
+  name: string
+  getData(): Promise<{
+    id?: unknown
+    _id?: unknown
+    objectID: unknown
+    [key: string]: unknown
+  }>
+  settings?: IndexSettings
+  matchFields?: string[]
 }
 
-export async function indexAlgolia({ appId, apiKey, indices, ...config }) {
+export type Options = {
+  verbosity: number
+  partialUpdates: boolean
+  matchFields: string[]
+  settings: IndexSettings
+}
+
+export type Config = {
+  appId: string
+  apiKey: string
+  indices: IndexConfig[]
+} & Partial<Options>
+// Partial<T> makes all keys in T optional
+
+export function deepEqual(
+  obj1: Record<string, unknown>,
+  obj2: Record<string, unknown>
+): boolean {
+  return obj1 && obj2 && typeof obj1 === `object` && typeof obj1 === typeof obj2
+    ? Object.keys(obj1).length === Object.keys(obj2).length &&
+        Object.keys(obj1).every((key) => deepEqual(obj1[key], obj2[key]))
+    : obj1 === obj2
+}
+
+export async function indexAlgolia({
+  appId,
+  apiKey,
+  indices,
+  ...rest
+}: Config): Promise<void> {
   const client = algoliasearch(appId, apiKey)
-  config = { ...defaultConfig, ...config }
+  const config = { ...defaultConfig, ...rest }
 
   if (config.verbosity > 0) {
     if (config.partialUpdates)
@@ -36,51 +74,61 @@ export async function indexAlgolia({ appId, apiKey, indices, ...config }) {
   }
 }
 
-const updateIndex = (client, config) => async (indexObj) => {
-  const { partialUpdates = false, matchFields: mainMatchFields } = config
-  const { name, getData, matchFields = mainMatchFields } = indexObj
-  let { settings = config.settings } = indexObj
+const updateIndex = (client: SearchClient, config: Options) => {
+  return async (indexConfig: IndexConfig) => {
+    const { partialUpdates = false, matchFields: mainMatchFields } = config
 
-  const index = client.initIndex(name)
-  const data = await callGetter(getData)
+    const { name, getData, matchFields = mainMatchFields } = indexConfig
+    const { settings = config.settings || {} } = indexConfig
 
-  // if user specified any settings, apply them
-  // if the index doesn't exist yet, applying settings (even if empty) will create it
-  // see https://algolia.com/doc/api-client/methods/manage-indices#create-an-index
-  const { taskID } = await index.setSettings(settings)
-  await index.waitTask(taskID)
+    const index = client.initIndex(name)
+    const data = await callGetter(getData)
 
-  if (partialUpdates) {
-    // get all match fields for all indices to minimize calls to the api
-    const allMatchFields = [...new Set([...mainMatchFields, ...matchFields])]
-    await partialUpdate(index, data, allMatchFields, config)
-  } else {
-    // if partialUpdates isn't true, overwrite old index with all of data
-    await overwriteUpdate(index, data, client, config)
+    // if user specified any settings, apply them
+    // if the index doesn't exist yet, applying settings (even if empty) will create it
+    // see https://algolia.com/doc/api-client/methods/manage-indices#create-an-index
+    const { taskID } = await index.setSettings(settings)
+    await index.waitTask(taskID)
+
+    if (partialUpdates) {
+      // get all match fields for all indices to minimize calls to the api
+      const allMatchFields = [...new Set([...mainMatchFields, ...matchFields])]
+      await partialUpdate(index, data, allMatchFields, config)
+    } else {
+      // if partialUpdates isn't true, overwrite old index with all of data
+      await overwriteUpdate(index, data, client, config)
+    }
   }
 }
 
-async function callGetter(getter) {
-  const results = await getter()
-  if (results.errors)
-    console.error(
-      `failed to index to Algolia, ` +
-        `errors:\n ${JSON.stringify(results.errors, null, 2)}`
-    )
+async function callGetter(
+  getter: IndexConfig[`getData`]
+): Promise<ObjectWithObjectID[] | void> {
+  try {
+    const results = await getter()
 
-  results.forEach((obj) => {
-    if (!obj.objectID && !obj.id && !obj._id)
-      console.error(
-        `failed to index to svelte-algolia: ${JSON.stringify(obj, null, 2)}` +
-          ` has neither an 'objectID' nor 'id' key`
-      )
-    // convert to string to prevent processing items with integer IDs as new in partialUpdate
-    obj.objectID = `${obj.objectID || obj.id || obj._id}`
-  })
-  return results
+    results.forEach((obj: { [key: string]: unknown }) => {
+      if (!obj.objectID && !obj.id && !obj._id)
+        console.error(
+          `failed to index to svelte-algolia: ${JSON.stringify(obj, null, 2)}` +
+            ` has neither an 'objectID' nor 'id' key`
+        )
+      // convert to string to prevent processing items with integer IDs as new in partialUpdate
+      obj.objectID = `${obj.objectID || obj.id || obj._id}`
+    })
+
+    return results
+  } catch (err) {
+    console.error(`failed to index to Algolia due to ${err}`)
+  }
 }
 
-async function overwriteUpdate(index, data, client, config) {
+async function overwriteUpdate(
+  index: SearchIndex,
+  data: ObjectWithObjectID[],
+  client: SearchClient,
+  config: Options
+) {
   const { indexName: name } = index
   try {
     const tmpIndex = client.initIndex(`${name}_tmp`)
@@ -101,7 +149,12 @@ async function overwriteUpdate(index, data, client, config) {
   }
 }
 
-async function partialUpdate(index, data, matchFields, config) {
+async function partialUpdate(
+  index: SearchIndex,
+  data: ObjectWithObjectID[],
+  matchFields: string[],
+  config: Options
+) {
   const { indexName: name } = index
   const existingObjects = await fetchExistingData(index, matchFields)
 
@@ -115,7 +168,7 @@ async function partialUpdate(index, data, matchFields, config) {
     if (!existingIDs.includes(id)) return true
 
     if (matchFields) {
-      // id matches existing object, so compare match fields to check if existing object neeeds to be updated
+      // id matches existing object, so compare match fields to check if existing object needs to be updated
       if (!matchFields.every((field) => newObj[field])) {
         console.error(
           `when partialUpdates is true, the objects must have at least one of the match fields.` +
@@ -167,8 +220,11 @@ async function partialUpdate(index, data, matchFields, config) {
 }
 
 // Fetches all records for the current index from Algolia
-async function fetchExistingData(index, attributesToRetrieve) {
-  const hits = []
+async function fetchExistingData(
+  index: SearchIndex,
+  attributesToRetrieve: string[]
+) {
+  const hits: ObjectWithObjectID[] = []
   await index.browseObjects({
     query: ``, // Empty query matches all records
     batch: (batch) => hits.push(...batch),
