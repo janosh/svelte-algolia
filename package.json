@@ -27,30 +27,30 @@
     "client-side"
   ],
   "dependencies": {
-    "algoliasearch": "^4.10.4"
+    "algoliasearch": "^4.11.0"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.17",
-    "@sveltejs/kit": "^1.0.0-next.156",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@sveltejs/adapter-static": "^1.0.0-next.24",
+    "@sveltejs/kit": "^1.0.0-next.211",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
     "ava": "^3.15.0",
     "dotenv": "^10.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-svelte3": "^3.2.0",
+    "eslint": "^8.5.0",
+    "eslint-plugin-svelte3": "^3.2.1",
     "hastscript": "^7.0.2",
     "mdsvex": "^0.9.8",
-    "prettier": "^2.3.2",
-    "prettier-plugin-svelte": "^2.2.0",
-    "rehype-autolink-headings": "^6.1.0",
-    "rehype-slug": "^5.0.0",
-    "svelte": "^3.42.2",
-    "svelte-check": "^2.2.4",
-    "svelte-preprocess": "^4.7.4",
-    "svelte-toc": "^0.1.8",
-    "svelte2tsx": "^0.4.5",
-    "typescript": "^4.3.5",
-    "vite": "^2.5.0"
+    "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.5.1",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.0.1",
+    "svelte": "^3.44.3",
+    "svelte-check": "^2.2.11",
+    "svelte-preprocess": "^4.10.1",
+    "svelte-toc": "^0.2.0",
+    "svelte2tsx": "^0.4.12",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.10"
   },
   "publishConfig": {
     "access": "public"
