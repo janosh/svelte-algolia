@@ -1,9 +1,9 @@
 import algoliasearch from 'algoliasearch'
 import test from 'ava'
 import 'dotenv/config'
-import { indexAlgolia } from '../src/lib/main.js'
+import { indexAlgolia } from '../package/main.js'
 // data from https://git.io/J3hvR
-import pokedex from './fixtures/pokedex.json'
+import pokedex from './fixtures/pokedex.json' assert { type: 'json' }
 
 const { ALGOLIA_APP_ID: appId, ALGOLIA_ADMIN_KEY: apiKey } = process.env
 const client = algoliasearch(appId, apiKey)

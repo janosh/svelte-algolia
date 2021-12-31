@@ -218,7 +218,8 @@ For example:
   {searchKey}
   --hitsBgColor="var(--bodyBg)"
   --inputColor="var(--textColor)"
-  --iconColor="var(--linkColor)" />
+  --iconColor="var(--linkColor)"
+/>
 ```
 
 The top level element is an `aside` with class `svelte-algolia`. So you can also style the entire DOM tree below it by defining global styles like

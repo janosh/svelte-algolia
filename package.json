@@ -15,7 +15,7 @@
     "serve": "yarn build && yarn preview",
     "prebuild": "cp readme.md src/docs.svx && sed -i.bak '1,/^<!-- remove above in docs -->$/d' src/docs.svx && rm src/docs.svx.bak",
     "predev": "yarn prebuild",
-    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
+    "test": "svelte-kit package && ava --node-arguments='--experimental-json-modules' --timeout=2m",
     "prepublishOnly": "yarn test"
   },
   "keywords": [
