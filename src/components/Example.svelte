@@ -1,7 +1,7 @@
 <script>
   import { session } from '$app/stores'
-  import Search from '../lib/Search.svelte'
   import PokemonHit from '../components/PokemonHit.svelte'
+  import Search from '../lib/Search.svelte'
 
   const { ALGOLIA_APP_ID: appId, ALGOLIA_SEARCH_KEY: searchKey } = $session
 
@@ -25,7 +25,8 @@
       indices={{ Pokedex: PokemonHit }}
       on:focus={() => (searchEverFocused = true)}
       placeholder="Search Pokedex"
-      --hitsBgColor="black" />
+      --hitsBgColor="black"
+    />
   </div>
 </header>
 

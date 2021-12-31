@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { onMount, createEventDispatcher, SvelteComponent } from 'svelte'
-  import algoliasearch, { SearchClient } from 'algoliasearch/lite.js'
-
-  import SearchIcon from './SearchIcon.svelte'
-  import { onClickOutside } from './actions'
   import type { Hit } from '@algolia/client-search'
+  import algoliasearch, { SearchClient } from 'algoliasearch/lite.js'
+  import { createEventDispatcher, onMount, SvelteComponent } from 'svelte'
+  import { onClickOutside } from './actions'
+  import SearchIcon from './SearchIcon.svelte'
 
   type SearchHit = Hit<Record<string, unknown>>
 
@@ -65,17 +64,20 @@
     on:focus={() => dispatch(`focus`)}
     {placeholder}
     aria-label={ariaLabel}
-    class:hasFocus />
+    class:hasFocus
+  />
   <button
     on:click={() => {
       hasFocus = true
       input.focus()
     }}
-    title={ariaLabel}>
+    title={ariaLabel}
+  >
     <SearchIcon
       ariaLabel="Search Icon"
       height="{hasFocus ? 1.9 : 2.3}ex"
-      style="cursor: pointer;" />
+      style="cursor: pointer;"
+    />
   </button>
   {#if hasFocus && query}
     <div class="results">
@@ -94,7 +96,8 @@
                   <svelte:component
                     this={indices[index]}
                     {hit}
-                    on:close={() => (hasFocus = false)} />
+                    on:close={() => (hasFocus = false)}
+                  />
                 {/each}
               </section>
             {/if}

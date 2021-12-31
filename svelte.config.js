@@ -1,14 +1,11 @@
-import 'dotenv/config'
-import { indexAlgolia } from './src/lib/main.js'
-import fs from 'fs'
-
 import adapter from '@sveltejs/adapter-static'
-import { mdsvex } from 'mdsvex'
-import preprocess from 'svelte-preprocess'
-
-import headingSlugs from 'rehype-slug'
-import linkHeadings from 'rehype-autolink-headings'
+import 'dotenv/config'
+import fs from 'fs'
 import { s } from 'hastscript'
+import { mdsvex } from 'mdsvex'
+import linkHeadings from 'rehype-autolink-headings'
+import headingSlugs from 'rehype-slug'
+import preprocess from 'svelte-preprocess'
 
 const rehypePlugins = [
   headingSlugs,

@@ -1,16 +1,23 @@
 <script>
   import Toc from 'svelte-toc'
-
   import Example from '../components/Example.svelte'
   import GitHubCorner from '../components/GitHubCorner.svelte'
-
-  import SearchIcon from '../lib/SearchIcon.svelte'
   import Docs from '../docs.svx'
+  import SearchIcon from '../lib/SearchIcon.svelte'
 </script>
 
-<Toc headingSelector={[...Array(5).keys()].map((i) => `main h${i + 2}`)} --toc-mobile-bg-color="black" --toc-mobile-btn-color="white" --toc-desktop-margin="11em 0 0 0" />
+<Toc
+  headingSelector={[...Array(5).keys()].map((i) => `main h${i + 2}`)}
+  --toc-mobile-bg-color="black"
+  --toc-mobile-btn-color="white"
+  --toc-desktop-margin="11em 0 0 0"
+/>
 
-<GitHubCorner href="https://github.com/janosh/svelte-algolia" --ghc-color="var(--body-bg)" --ghc-bg="white" />
+<GitHubCorner
+  href="https://github.com/janosh/svelte-algolia"
+  --ghc-color="var(--body-bg)"
+  --ghc-bg="white"
+/>
 
 <main>
 
@@ -24,7 +31,7 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 ## Live Demo
 
-This is what Svelte-Algolia integrated into a nav bar might look like. Click the <SearchIcon />  icon to try it out!
+This is what Svelte-Algolia integrated into a nav bar might look like. Click the <SearchIcon /> icon to try it out!
 
 <Example />
 
@@ -37,9 +44,6 @@ This is what Svelte-Algolia integrated into a nav bar might look like. Click the
 <style>
   h1 {
     font-size: calc(1em + 3vw);
-  }
-  h1 > a {
-    display: none;
   }
   h1 img {
     height: 1.2em;
