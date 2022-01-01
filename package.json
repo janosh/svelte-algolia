@@ -5,8 +5,9 @@
   "homepage": "https://svelte-algolia.netlify.app",
   "repository": "https://github.com/janosh/svelte-algolia",
   "license": "MIT",
-  "version": "0.2.7",
+  "version": "0.2.9",
   "type": "module",
+  "svelte": "Search.svelte",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
