@@ -27,7 +27,7 @@ jobs:
         run: yarn
 
       - name: Run tests
-        run: yarn test
+        run: yarn package && yarn test
         env:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_SEARCH_KEY: ${{ secrets.ALGOLIA_SEARCH_KEY }}

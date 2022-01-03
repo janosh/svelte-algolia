@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch'
 import test from 'ava'
 import 'dotenv/config'
-import { indexAlgolia } from '../package/main.js'
+import { indexAlgolia } from '../package/server-side.js'
 // data from https://git.io/J3hvR
 import pokedex from './fixtures/pokedex.json' assert { type: 'json' }
 

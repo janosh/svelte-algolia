@@ -7,7 +7,7 @@
 </script>
 
 <Toc
-  headingSelector={[...Array(5).keys()].map((i) => `main h${i + 2}`)}
+  headingSelector="main :is(h2, h3, h4, h5, h6)"
   --toc-mobile-bg-color="black"
   --toc-mobile-btn-color="white"
   --toc-desktop-margin="11em 0 0 0"

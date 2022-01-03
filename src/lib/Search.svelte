@@ -9,7 +9,9 @@
 
   export let appId: string
   export let searchKey: string
-  export let indices: Record<string, typeof SvelteComponent>
+  export let indices:
+    | Record<string, typeof SvelteComponent>
+    | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
   export let loadingStr = `Searching...`
   export let noResultMsg = (query: string): string => `No results for '${query}'`
   export let resultCounter = (hits: SearchHit[]): string =>
@@ -21,8 +23,10 @@
   const dispatch = createEventDispatcher()
 
   for (let [key, val] of Object.entries({ appId, searchKey, indices })) {
-    if (!val) console.error(`Invalid ${key}: ${val}`)
+    if (!val) console.error(`svelte-algolia: Invalid ${key}: ${val}`)
   }
+
+  $: _indices = Array.isArray(indices) ? Object.fromEntries(indices) : indices
 
   let client: SearchClient
   let input: HTMLInputElement
@@ -48,7 +52,7 @@
 
   async function search() {
     const { results } = await client.search(
-      Object.keys(indices).map((indexName) => ({ indexName, query }))
+      Object.keys(_indices).map((indexName) => ({ indexName, query }))
     )
 
     return results.map(({ hits, index }) => ({ hits: processHits(hits), index }))
@@ -85,16 +89,16 @@
         <p>{loadingStr}</p>
       {:then allHits}
         {#if allHits?.some(({ hits }) => hits.length)}
-          {#each allHits as { index, hits } (index)}
+          {#each allHits as { index: idxName, hits } (idxName)}
             {#if hits.length}
               <section>
                 <h2>
-                  {index}
+                  {idxName}
                   {@html resultCounter(hits)}
                 </h2>
                 {#each hits as hit (hit.objectID)}
                   <svelte:component
-                    this={indices[index]}
+                    this={_indices[idxName]}
                     {hit}
                     on:close={() => (hasFocus = false)}
                   />

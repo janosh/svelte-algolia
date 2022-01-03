@@ -57,9 +57,9 @@ const algoliaConfig = {
 
 if (
   process.env.NODE_ENV === `production` &&
-  fs.existsSync(`./package/main.js`)
+  fs.existsSync(`./package/server-side`)
 ) {
-  const { indexAlgolia } = await import(`./package/main.js`)
+  const { indexAlgolia } = await import(`./package/server-side`)
   indexAlgolia(algoliaConfig)
 }
 

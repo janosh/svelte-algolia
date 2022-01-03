@@ -5,7 +5,7 @@
 # Svelte Algolia
 
 [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/main.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/main)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/server-side.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/server-side)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
 
@@ -55,7 +55,7 @@ There are three steps to setting up `svelte-algolia`:
 2. Pass your config to `indexAlgolia`:
 
    ```js
-   import { indexAlgolia } from 'svelte-algolia/main.js'
+   import { indexAlgolia } from 'svelte-algolia/server-side'
 
    indexAlgolia(algoliaConfig)
    ```
@@ -87,14 +87,16 @@ To use this package as part of a build process (e.g. in a [SvelteKit](https://ki
 
 ```js
 // svelte.config.js
-import { indexAlgolia } from 'svelte-algolia/main.js'
-
-const algoliaConfig = {
-  // see above
-}
 
 // only update Algolia indices on production builds (saves Algolia API quota)
-if (process.env.NODE_ENV === `production`) indexAlgolia(algoliaConfig)
+if (process.env.NODE_ENV === `production`) {
+  const { indexAlgolia } = await import(`svelte-algolia/server-side`)
+
+  const algoliaConfig = {
+    // see above
+  }
+  indexAlgolia(algoliaConfig)
+}
 ```
 
 ## 3. Client Side UI

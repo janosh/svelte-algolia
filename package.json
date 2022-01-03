@@ -7,6 +7,7 @@
   "license": "MIT",
   "version": "0.2.7",
   "type": "module",
+  "svelte": "Search.svelte",
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -15,7 +16,7 @@
     "serve": "yarn build && yarn preview",
     "prebuild": "cp readme.md src/docs.svx && sed -i.bak '1,/^<!-- remove above in docs -->$/d' src/docs.svx && rm src/docs.svx.bak",
     "predev": "yarn prebuild",
-    "test": "svelte-kit package && ava --node-arguments='--experimental-json-modules' --timeout=2m",
+    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
     "prepublishOnly": "yarn test"
   },
   "keywords": [
