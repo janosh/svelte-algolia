@@ -1,0 +1,47 @@
+<script>
+  import GitHubCorner from 'svelte-github-corner'
+  import Toc from 'svelte-toc'
+  import Readme from '../../readme.md'
+  import Example from '../components/Example.svelte'
+</script>
+
+<Toc
+  headingSelector="h2, h3, h4, h5, h6"
+  --toc-mobile-bg-color="black"
+  --toc-mobile-btn-color="white"
+  --toc-desktop-margin="11em 0 0 0"
+/>
+
+<GitHubCorner
+  href="https://github.com/janosh/svelte-algolia"
+  --ghc-color="var(--body-bg)"
+  --ghc-bg="white"
+/>
+
+<main>
+  <Readme>
+    <Example />
+  </Readme>
+</main>
+
+<style>
+  :global(h1) {
+    display: flex;
+    font-size: clamp(2rem, 2rem + 2vw, 3rem);
+    place-items: center;
+    place-content: center;
+    margin: 1.2em 0;
+  }
+  :global(h1 br) {
+    display: none;
+  }
+  @media (max-width: 600px) {
+    :global(h1) {
+      flex-direction: column;
+      gap: 1ex;
+    }
+  }
+  :global(.hide-in-docs) {
+    display: none;
+  }
+</style>

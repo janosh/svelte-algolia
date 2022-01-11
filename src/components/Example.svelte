@@ -2,11 +2,19 @@
   import { session } from '$app/stores'
   import PokemonHit from '../components/PokemonHit.svelte'
   import Search from '../lib/Search.svelte'
+  import SearchIcon from '../lib/SearchIcon.svelte'
 
   const { ALGOLIA_APP_ID: appId, ALGOLIA_SEARCH_KEY: searchKey } = $session
 
   let searchEverFocused = false
 </script>
+
+<h2>Live Demo</h2>
+
+<p>
+  This is what Svelte-Algolia integrated into a nav bar might look like. Click the <SearchIcon
+  /> icon to try it out!
+</p>
 
 <header>
   <nav>

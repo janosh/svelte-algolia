@@ -12,13 +12,11 @@ body {
 div#svelte {
   display: flex;
   margin: auto;
-  max-width: 1000px;
+  max-width: 1050px;
 }
 main {
   max-width: 50em;
-  margin: auto;
   margin-bottom: 3em;
-  width: 100%;
 }
 * {
   scroll-margin-top: 50px;

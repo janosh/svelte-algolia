@@ -64,12 +64,23 @@ if (
 }
 
 export default {
-  extensions: [`.svelte`, `.svx`],
-  preprocess: [preprocess(), mdsvex({ rehypePlugins })],
+  extensions: [`.svelte`, `.svx`, `.md`],
+
+  preprocess: [
+    preprocess(),
+    mdsvex({ rehypePlugins, extensions: [`.svx`, `.md`] }),
+  ],
+
   kit: {
     adapter: adapter(),
 
     // hydrate the <body> element in src/app.html
     target: `#svelte`,
+
+    vite: {
+      server: {
+        fs: { allow: [`..`] }, // needed to import readme.md
+      },
+    },
   },
 }

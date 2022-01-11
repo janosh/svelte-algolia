@@ -1,21 +1,29 @@
-<p align="center">
-  <img src="static/banner.svg" alt="Svelte Algolia" height=150>
-</p>
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/janosh/svelte-algolia/main/static/favicon.svg" alt="Svelte Algolia" height=60>
+  <br>&ensp;Svelte Algolia
+</h1>
 
-# Svelte Algolia
+<h4 align="center">
 
 [![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/server-side.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/server-side)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
 
+</h4>
+
+<div class="hide-in-docs">
+
 [**Live Demo**](https://svelte-algolia.netlify.app)
 
-Utility for server-side Algolia index updates plus a client-side search component for Svelte apps. Only adds a single dependency on server and client: [`algoliasearch`](https://npmjs.com/package/algoliasearch)/[`algoliasearch/lite`](https://algolia.com/doc/api-client/getting-started/install/javascript?client=javascript#explanation-of-different-builds) (13 KB).
+</div>
 
-> The server-side part of this package was inspired by [`gatsby-plugin-algolia`](https://github.com/algolia/gatsby-plugin-algolia).
+Utility for server-side Algolia index updates plus a client-side search component for Svelte apps. Only adds a single dependency:
 
-<!-- remove above in docs -->
+- server-side: [`algoliasearch`](https://npmjs.com/package/algoliasearch)
+- client-side: [`algoliasearch/lite`](https://algolia.com/doc/api-client/getting-started/install/javascript?client=javascript#explanation-of-different-builds) (13 KB).
+
+<slot />
 
 There are three steps to setting up `svelte-algolia`:
 
