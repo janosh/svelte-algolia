@@ -3,6 +3,7 @@ import test from 'ava'
 import 'dotenv/config'
 import { indexAlgolia } from '../package/server-side.js'
 // data from https://git.io/J3hvR
+// eslint-disable-next-line @typescript-eslint/quotes
 import pokedex from './fixtures/pokedex.json' assert { type: 'json' }
 
 const { ALGOLIA_APP_ID: appId, ALGOLIA_ADMIN_KEY: apiKey } = process.env

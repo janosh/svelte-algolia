@@ -1,6 +1,4 @@
 import adapter from '@sveltejs/adapter-static'
-import 'dotenv/config'
-import fs from 'fs'
 import { s } from 'hastscript'
 import { mdsvex } from 'mdsvex'
 import linkHeadings from 'rehype-autolink-headings'
@@ -23,45 +21,6 @@ const rehypePlugins = [
     },
   ],
 ]
-
-function loadJsonPokedex() {
-  // each pokemon already has an ID so no need to create objectID for algolia
-  const json = fs.readFileSync(`tests/fixtures/pokedex.json`, `utf8`)
-  return JSON.parse(json)
-}
-
-const algoliaConfig = {
-  appId: process.env.ALGOLIA_APP_ID,
-  apiKey: process.env.ALGOLIA_ADMIN_KEY,
-  indices: [{ name: `Pokedex`, getData: loadJsonPokedex }],
-  settings: {
-    attributesToHighlight: [
-      `avgSpawns`,
-      `candy`,
-      `candyCount`,
-      `egg`,
-      `height`,
-      `multipliers`,
-      `name`,
-      `nextEvolution.name`,
-      `num`,
-      `prevEvolution.name`,
-      `spawnChance`,
-      `spawnTime`,
-      `type`,
-      `weaknesses`,
-      `weight`,
-    ],
-  },
-}
-
-if (
-  process.env.NODE_ENV === `production` &&
-  fs.existsSync(`./package/server-side`)
-) {
-  const { indexAlgolia } = await import(`./package/server-side`)
-  indexAlgolia(algoliaConfig)
-}
 
 export default {
   extensions: [`.svelte`, `.svx`, `.md`],

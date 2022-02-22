@@ -29,7 +29,7 @@ There are three steps to setting up `svelte-algolia`:
 
 1. `npm i -D svelte-algolia`
 2. Setup your [server-side index updates](#2-server-side-index-updates).
-3. Integrate the [client-side search component](#3-client-side-ui) into your UI.
+3. Integrate the [client-side search component](#3-client-side-ui) into your site.
 
 ## 2. Server-Side Index Updates
 
@@ -44,7 +44,8 @@ There are three steps to setting up `svelte-algolia`:
    }
 
    const algoliaConfig = {
-     appId: process.env.ALGOLIA_APP_ID,
+     appId: process.env.VITE_ALGOLIA_APP_ID,
+     // don't prefix admin key with VITE_ else it would get exposed to client-side code
      apiKey: process.env.ALGOLIA_ADMIN_KEY,
      indices: [
        { name: `Pokedex`, getData: loadPokedex },
@@ -68,7 +69,7 @@ There are three steps to setting up `svelte-algolia`:
    indexAlgolia(algoliaConfig)
    ```
 
-   You can call this function wherever you'd like to update your indices. Typically, you would include this in every production build of your app.
+   You can call this function wherever you'd like to update your indices, e.g. in `svelte.config.js` or in `src/hooks.ts` (as this demo site does). Typically, you would include this in every production build of your app.
 
 ### Config Options
 
@@ -109,7 +110,7 @@ if (process.env.NODE_ENV === `production`) {
 
 ## 3. Client Side UI
 
-`<Search />` needs your Algolia app's ID and search key to access its search indices as well as a mapping from index to corresponding Svelte-component that should render hits (items matching searches in that index). Each hit component receives a `hit` object as prop with all attributes stored in the Algolia index.
+`<Search />` needs your Algolia app's ID and search key to access its search indices as well as a mapping from index names to corresponding Svelte-component that should render search hits coming from that index. Each hit component receives a `hit` object as prop with all attributes stored in the Algolia index.
 
 ```svelte
 <script>
@@ -118,6 +119,9 @@ if (process.env.NODE_ENV === `production`) {
 
   const appId = '0OJ5UL9OJX'
   const searchKey = '63f563566cdd6de606e2bb0fdc291994'
+  // in a real app you'd get your credentials like this:
+  const appId = import.meta.env.VITE_ALGOLIA_APP_ID
+  const searchKey = import.meta.env.VITE_ALGOLIA_SEARCH_KEY
 </script>
 
 <header>

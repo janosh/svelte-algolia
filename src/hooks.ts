@@ -1,17 +1,37 @@
-// https://kit.svelte.dev/docs#hooks-getsession
-export function getSession(): Record<string, string> {
-  const keys = [`ALGOLIA_APP_ID`, `ALGOLIA_SEARCH_KEY`]
+import { dev } from '$app/env'
+import 'dotenv/config'
+import pokedex from '../tests/fixtures/pokedex.json'
+import { indexAlgolia } from './lib/server-side'
 
-  for (const key of keys) {
-    if (!process.env[key]) {
-      // eslint-disable-next-line no-console
-      console.error(`missing secret key: ${key}`)
-    }
+const appId = import.meta.env.VITE_ALGOLIA_APP_ID
+const apiKey = process.env.ALGOLIA_ADMIN_KEY
+
+// only update Algolia indices if required env vars are defined
+if (dev === false && appId && apiKey) {
+  // update Algolia search indices on production builds
+  const algoliaConfig = {
+    appId,
+    apiKey,
+    indices: [{ name: `Pokedex`, getData: () => pokedex }],
+    settings: {
+      attributesToHighlight: [
+        `avgSpawns`,
+        `candy`,
+        `candyCount`,
+        `egg`,
+        `height`,
+        `multipliers`,
+        `name`,
+        `nextEvolution.name`,
+        `num`,
+        `prevEvolution.name`,
+        `spawnChance`,
+        `spawnTime`,
+        `type`,
+        `weaknesses`,
+        `weight`,
+      ],
+    },
   }
-
-  const session = Object.fromEntries(
-    keys.map((key) => [key, process.env[key] as string])
-  )
-
-  return session
+  indexAlgolia(algoliaConfig)
 }
