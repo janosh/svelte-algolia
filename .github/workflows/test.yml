@@ -3,9 +3,9 @@ name: Tests
 on:
   workflow_dispatch:
   push:
-    paths: ['**/*.js'] # only run workflow when source files changed
+    branches: [main]
   pull_request:
-    paths: ['**/*.js']
+    branches: [main]
   schedule:
     # run tests monthly to prevent Algolia test index from being suspended due to inactivity
     - cron: '0 0 1 * *' # at 00:00 UTC on 1st day of every month (https://crontab.guru)
