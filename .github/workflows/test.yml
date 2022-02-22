@@ -28,7 +28,7 @@ jobs:
         run: yarn
 
       - name: Run tests
-        run: yarn package && yarn test
+        run: yarn test
         env:
           VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
           VITE_ALGOLIA_SEARCH_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_KEY }}

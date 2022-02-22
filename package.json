@@ -14,7 +14,7 @@
     "preview": "svelte-kit preview",
     "package": "svelte-kit package",
     "serve": "yarn build && yarn preview",
-    "test": "ava --node-arguments='--experimental-json-modules' --timeout=2m",
+    "test": "vitest",
     "prepublishOnly": "yarn test"
   },
   "keywords": [
@@ -33,7 +33,6 @@
     "@sveltejs/kit": "^1.0.0-next.281",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
-    "ava": "^4.0.1",
     "dotenv": "^16.0.0",
     "eslint": "^8.9.0",
     "eslint-plugin-svelte3": "^3.4.0",
@@ -50,7 +49,8 @@
     "svelte-toc": "^0.2.6",
     "svelte2tsx": "^0.5.5",
     "typescript": "^4.5.5",
-    "vite": "^2.8.4"
+    "vite": "^2.8.4",
+    "vitest": "^0.5.2"
   },
   "publishConfig": {
     "access": "public"
