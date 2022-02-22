@@ -1,10 +1,10 @@
 <script>
-  import { session } from '$app/stores'
   import PokemonHit from '../components/PokemonHit.svelte'
   import Search from '../lib/Search.svelte'
   import SearchIcon from '../lib/SearchIcon.svelte'
 
-  const { ALGOLIA_APP_ID: appId, ALGOLIA_SEARCH_KEY: searchKey } = $session
+  const appId = import.meta.env.VITE_ALGOLIA_APP_ID
+  const searchKey = import.meta.env.VITE_ALGOLIA_SEARCH_KEY
 
   let searchEverFocused = false
 </script>
