@@ -13,6 +13,13 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v2
 
+      - name: Run tests
+        run: yarn test
+        env:
+          VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          VITE_ALGOLIA_SEARCH_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_KEY }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+
       - name: Build and publish package
         run: |
           yarn

@@ -34,4 +34,12 @@
     display: flex;
     justify-content: space-between;
   }
+  div > ul {
+    padding: 0 0 0 1em;
+    margin: 0;
+    line-height: normal;
+  }
+  div > img {
+    place-self: center;
+  }
 </style>
