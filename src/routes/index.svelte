@@ -6,8 +6,8 @@
 </script>
 
 <Toc
-  headingSelector="h2, h3, h4, h5, h6"
-  --toc-mobile-bg-color="black"
+  headingSelector="h2, h3, h4"
+  --toc-mobile-bg="black"
   --toc-mobile-btn-color="white"
   --toc-desktop-margin="11em 0 0 0"
 />
