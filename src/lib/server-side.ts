@@ -5,6 +5,8 @@ import type {
 } from '@algolia/client-search'
 import algoliasearch, { SearchClient, SearchIndex } from 'algoliasearch'
 
+type MaybePromise<T> = T | Promise<T> | PromiseLike<T>
+
 const defaultConfig = {
   partialUpdates: false,
   verbosity: 1,
@@ -14,12 +16,12 @@ const defaultConfig = {
 
 export type IndexConfig = {
   name: string
-  getData(): Promise<{
-    id?: unknown
-    _id?: unknown
-    objectID: unknown
-    [key: string]: unknown
-  }>
+  getData(): MaybePromise<
+    // getData can return any array of objects but each must have a key id, _id or objectID
+    ({
+      [key: string]: unknown
+    } & ({ id: unknown } | { _id: unknown } | { objectID: unknown }))[]
+  >
   settings?: IndexSettings
   matchFields?: string[]
 }

@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { Hit } from '@algolia/client-search'
-  import algoliasearch, {
-    SearchClient,
-  } from 'algoliasearch/dist/algoliasearch-lite.esm.browser'
+  import algoliasearch, { SearchClient } from 'algoliasearch/lite.js'
   import { createEventDispatcher, onMount, SvelteComponent } from 'svelte'
   import { onClickOutside } from './actions'
   import SearchIcon from './SearchIcon.svelte'
