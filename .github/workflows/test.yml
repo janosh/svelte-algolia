@@ -15,13 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Check out repo
         uses: actions/checkout@v2
 
-      - name: Setup Node v17
+      - name: Set up node v17
         uses: actions/setup-node@v2
         with:
           node-version: 17
+          cache: yarn
 
       - name: Install dependencies
         run: yarn
@@ -29,6 +30,6 @@ jobs:
       - name: Run tests
         run: yarn package && yarn test
         env:
-          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          ALGOLIA_SEARCH_KEY: ${{ secrets.ALGOLIA_SEARCH_KEY }}
+          VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          VITE_ALGOLIA_SEARCH_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_KEY }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}

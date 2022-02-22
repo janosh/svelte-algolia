@@ -5,7 +5,7 @@
 
 <h4 align="center">
 
-[![Test Status](https://github.com/janosh/svelte-algolia/workflows/Tests/badge.svg)](https://github.com/janosh/svelte-algolia/actions)
+[![Tests](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml/badge.svg)](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/server-side.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/server-side)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
