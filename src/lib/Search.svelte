@@ -145,7 +145,7 @@
   input {
     background: var(--inputBg);
     color: var(--inputColor);
-    font-size: 1em;
+    font-size: var(--inputFontSize, 1em);
     border-radius: 5pt;
     border: 0;
     outline: none;
@@ -174,7 +174,6 @@
   div.results {
     background-color: var(--hitsBgColor, white);
     box-shadow: var(--hitsShadow, 0 0 2pt black);
-    min-width: 15em;
     z-index: 1;
     top: 3ex;
     max-height: 60vh;
