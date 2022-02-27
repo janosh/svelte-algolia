@@ -61,7 +61,7 @@
 
 <aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
   <input
-    type=":stringtext"
+    type="text"
     bind:this={input}
     bind:value={query}
     on:keyup={() => (promise = search())}

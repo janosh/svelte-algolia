@@ -3,7 +3,7 @@ import 'dotenv/config'
 import pokedex from '../tests/fixtures/pokedex.json'
 import { indexAlgolia } from './lib/server-side'
 
-const appId = import.meta.env.VITE_ALGOLIA_APP_ID
+const appId = process.env.VITE_ALGOLIA_APP_ID
 const apiKey = process.env.ALGOLIA_ADMIN_KEY
 
 // only update Algolia indices if required env vars are defined
