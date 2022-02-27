@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Hit } from '@algolia/client-search'
-  import algoliasearch, { SearchClient } from 'algoliasearch/lite.js'
+  import algoliasearch, {
+    SearchClient,
+  } from 'algoliasearch/dist/algoliasearch-lite.esm.browser'
   import { createEventDispatcher, onMount, SvelteComponent } from 'svelte'
   import { onClickOutside } from './actions'
   import SearchIcon from './SearchIcon.svelte'
@@ -61,7 +63,7 @@
 
 <aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
   <input
-    type=":stringtext"
+    type="text"
     bind:this={input}
     bind:value={query}
     on:keyup={() => (promise = search())}
