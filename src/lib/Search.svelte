@@ -3,8 +3,7 @@
   import algoliasearch, {
     SearchClient,
   } from 'algoliasearch/dist/algoliasearch-lite.esm.browser'
-  import { createEventDispatcher, onMount, SvelteComponent } from 'svelte'
-  import { onClickOutside } from './actions'
+  import { onMount, SvelteComponent } from 'svelte'
   import SearchIcon from './SearchIcon.svelte'
 
   type SearchHit = Hit<Record<string, unknown>>
@@ -21,8 +20,6 @@
   export let placeholder = `Search`
   export let ariaLabel = `Search`
   export let hasFocus = false
-
-  const dispatch = createEventDispatcher()
 
   for (let [key, val] of Object.entries({ appId, searchKey, indices })) {
     if (!val) console.error(`svelte-algolia: Invalid ${key}: ${val}`)
@@ -61,13 +58,15 @@
   }
 </script>
 
-<aside use:onClickOutside={() => (hasFocus = false)} class="svelte-algolia">
+<aside class="svelte-algolia">
   <input
     type="text"
     bind:this={input}
     bind:value={query}
     on:keyup={() => (promise = search())}
-    on:focus={() => dispatch(`focus`)}
+    on:focus
+    on:blur
+    on:blur={() => (hasFocus = false)}
     {placeholder}
     aria-label={ariaLabel}
     class:hasFocus
