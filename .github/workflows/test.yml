@@ -6,6 +6,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  release:
+    types: [published]
   schedule:
     # run tests monthly to prevent Algolia test index from being suspended due to inactivity
     - cron: '0 0 1 * *' # at 00:00 UTC on 1st day of every month (https://crontab.guru)
@@ -28,8 +30,18 @@ jobs:
         run: yarn
 
       - name: Run tests
+        id: tests
         run: yarn test
         env:
           VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
           VITE_ALGOLIA_SEARCH_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_KEY }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+
+      - name: Build and publish package
+        if: github.event_name == 'release' && steps.tests.outcome == 'success'
+        run: |
+          yarn
+          yarn package
+          yarn publish package
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

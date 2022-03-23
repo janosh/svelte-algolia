@@ -4,8 +4,8 @@ import { expect, test } from 'vitest'
 import PokemonHit from '../src/components/PokemonHit.svelte'
 import Search from '../src/lib/Search.svelte'
 
-const appId = import.meta.env.VITE_ALGOLIA_APP_ID as string
-const searchKey = import.meta.env.VITE_ALGOLIA_SEARCH_KEY as string
+const appId = process.env.VITE_ALGOLIA_APP_ID as string
+const searchKey = process.env.VITE_ALGOLIA_SEARCH_KEY as string
 
 const req_props = { appId, searchKey, indices: { Pokedex: PokemonHit } }
 const opt_props = { placeholder: `Search Pokedex`, ariaLabel: `Search` }
