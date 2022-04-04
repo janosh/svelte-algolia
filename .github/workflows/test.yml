@@ -40,7 +40,6 @@ jobs:
       - name: Build and publish package
         if: github.event_name == 'release' && steps.tests.outcome == 'success'
         run: |
-          yarn
           yarn package
           yarn publish package
         env:
