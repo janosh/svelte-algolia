@@ -9,9 +9,9 @@
   "type": "module",
   "svelte": "Search.svelte",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "preview": "svelte-kit preview",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
     "package": "svelte-kit package",
     "serve": "yarn build && yarn preview",
     "test": "vitest"
