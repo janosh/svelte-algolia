@@ -1,12 +1,8 @@
 <script lang="ts">
   import type { Hit } from '@algolia/client-search'
-  import algoliasearch, {
-    SearchClient,
-  } from 'algoliasearch/dist/algoliasearch-lite.esm.browser'
+  import algoliasearch, { SearchClient } from 'algoliasearch/lite'
   import { onMount, SvelteComponent } from 'svelte'
   import SearchIcon from './SearchIcon.svelte'
-
-  type SearchHit = Hit<Record<string, unknown>>
 
   export let appId: string
   export let searchKey: string
@@ -20,6 +16,8 @@
   export let placeholder = `Search`
   export let ariaLabel = `Search`
   export let hasFocus = false
+
+  type SearchHit = Hit<Record<string, unknown>>
 
   for (let [key, val] of Object.entries({ appId, searchKey, indices })) {
     if (!val) console.error(`svelte-algolia: Invalid ${key}: ${val}`)
@@ -159,6 +157,7 @@
   input.hasFocus {
     opacity: 1;
     width: 8em;
+    box-sizing: border-box;
     background: rgba(0, 0, 0, 0.2);
     padding: 1pt 4pt 1pt 3ex;
     margin-left: -2.5ex;
@@ -178,6 +177,7 @@
     max-height: 60vh;
     position: absolute;
     width: max-content;
+    box-sizing: border-box;
     max-width: 80vw;
     overflow: auto;
     right: 0;
