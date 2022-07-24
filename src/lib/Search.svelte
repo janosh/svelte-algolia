@@ -157,6 +157,7 @@
   input.hasFocus {
     opacity: 1;
     width: 8em;
+    box-sizing: border-box;
     background: rgba(0, 0, 0, 0.2);
     padding: 1pt 4pt 1pt 3ex;
     margin-left: -2.5ex;
@@ -176,6 +177,7 @@
     max-height: 60vh;
     position: absolute;
     width: max-content;
+    box-sizing: border-box;
     max-width: 80vw;
     overflow: auto;
     right: 0;
