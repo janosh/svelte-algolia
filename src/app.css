@@ -54,6 +54,9 @@ blockquote {
   transition: 0.3s;
   scroll-margin-top: 50px;
 }
+:is(h2, h3, h4, h5, h6).toc-clicked {
+  color: cornflowerblue;
+}
 
 table {
   border-collapse: collapse;

@@ -1,4 +1,4 @@
-import { dev } from '$app/env'
+import { dev } from '$app/environment'
 import 'dotenv/config'
 import pokedex from '../tests/fixtures/pokedex.json'
 import { indexAlgolia } from './lib/server-side'
