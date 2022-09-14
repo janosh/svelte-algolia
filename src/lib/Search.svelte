@@ -5,17 +5,17 @@
   import SearchIcon from './SearchIcon.svelte'
 
   export let appId: string
-  export let searchKey: string
+  export let ariaLabel = `Search`
+  export let hasFocus = false
   export let indices:
     | Record<string, typeof SvelteComponent>
     | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
-  export let loadingStr = `Searching...`
+  export let loadingMsg = `Searching...`
   export let noResultMsg = (query: string): string => `No results for '${query}'`
+  export let placeholder = `Search`
   export let resultCounter = (hits: SearchHit[]): string =>
     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
-  export let placeholder = `Search`
-  export let ariaLabel = `Search`
-  export let hasFocus = false
+  export let searchKey: string
 
   type SearchHit = Hit<Record<string, unknown>>
 
@@ -85,7 +85,7 @@
   {#if hasFocus && query}
     <div class="results">
       {#await promise}
-        <p>{loadingStr}</p>
+        <p>{loadingMsg}</p>
       {:then allHits}
         {#if allHits?.some(({ hits }) => hits.length)}
           {#each allHits as { index: idxName, hits } (idxName)}

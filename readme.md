@@ -175,18 +175,60 @@ Substrings in attributes matching the current search string will be wrapped in `
 
 Full list of props/bindable variables for this component:
 
-<!-- prettier-ignore -->
-| name            | default                                                                       | description                                                                                                                                                                   |
-| :-------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `appId`         | `String!`                                                                     | [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)                                                                                             |
-| `searchKey`     | `String!`                                                                     | [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)                                                                                  |
-| `indices`       | `{indexName: Component, ...}`                                                 | Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.                |
-| `loadingStr`    | `'Searching...'`                                                              | String to display in the results pane while Search results are being fetched.                                                                                                 |
-| `noResultMsg`   | ``(query) => `No results for '${query}'` ``                                   | Function that returns the string to display when search returned no results.                                                                                                  |
-| `resultCounter` | ```(hits) => hits.length > 0 ? `<span>Results: ${hits.length}<span>` : `` ``` | Function that returns a string which will be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing. |
-| `placeholder`   | `'Search'`                                                                    | Placeholder shown in the text input before user starts typing.                                                                                                                |
-| `ariaLabel`     | `'Search'`                                                                    | Tells assistive technology how to announce the input element to the user.                                                                                                     |
-| `hasFocus`      | `false`                                                                       | Bindable boolean indicating whether the text input or results pane currently has focus.                                                                                       |
+1. ```ts
+   appId: string
+   ```
+
+   [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)
+
+1. ```ts
+   ariaLabel: string = 'Search'
+   ```
+
+   Tells assistive technology how to announce the input element to the user.
+
+1. ```ts
+   hasFocus: boolean = false
+   ```
+
+   Bindable boolean indicating whether the text input or results pane currently has focus.
+
+1. ```ts
+   indices: | Record<string, typeof SvelteComponent> | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
+   ```
+
+   Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.
+
+1. ```ts
+   loadingMsg: string = 'Searching...'
+   ```
+
+   String to display in the results pane while Search results are being fetched.
+
+1. ```ts
+   noResultMsg = (query: string): string => `No results for '${query}'`
+   ```
+
+   Function that returns the string to display when search returned no results.
+
+1. ```ts
+   placeholder: string = 'Search'
+   ```
+
+   Placeholder shown in the text input before user starts typing.
+
+1. ```ts
+   resultCounter = (hits: SearchHit[]): string =>
+     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
+   ```
+
+   Function that returns a string which will be displayed next to the name of each index to show how many results were found in that index. Return empty string to show nothing.
+
+1. ```ts
+   searchKey: string
+   ```
+
+   [Search-only API key](https://algolia.com/doc/guides/security/api-keys/#search-only-api-key)
 
 ### Events
 
