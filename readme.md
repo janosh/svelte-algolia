@@ -182,7 +182,7 @@ Full list of props/bindable variables for this component:
    [Algolia app ID](https://algolia.com/doc/tools/crawler/apis/configuration/app-id)
 
 1. ```ts
-   ariaLabel: string = 'Search'
+   ariaLabel: string = `Search`
    ```
 
    Tells assistive technology how to announce the input element to the user.
@@ -200,7 +200,7 @@ Full list of props/bindable variables for this component:
    Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.
 
 1. ```ts
-   loadingMsg: string = 'Searching...'
+   loadingMsg: string = `Searching...`
    ```
 
    String to display in the results pane while Search results are being fetched.
@@ -212,7 +212,7 @@ Full list of props/bindable variables for this component:
    Function that returns the string to display when search returned no results.
 
 1. ```ts
-   placeholder: string = 'Search'
+   placeholder: string = `Search`
    ```
 
    Placeholder shown in the text input before user starts typing.
@@ -259,12 +259,21 @@ It also emits a **`focus`** event every the user clicks the search icon and focu
 
 `Search.svelte` offers the following CSS variables listed here with their defaults (if any) that can be [passed in directly as props](https://github.com/sveltejs/rfcs/pull/13):
 
-- `var(--iconColor)`
-- `var(--headingColor)`
-- `var(--inputBg)`
-- `var(--inputColor)`
-- `var(--hitsBgColor, white)`
-- `var(--hitsShadow, 0 0 2pt black)`
+- `button`
+  - `color: var(--search-icon-color)`
+- `h2`
+  - `color: var(--search-heading-color)`
+- `input`
+  - `background: var(--search-input-bg)`
+  - `color: var(--search-input-color)`
+  - `font-size: var(--search-input-font-size, 1em)`
+- `input::placeholder`
+  - `color: var(--search-input-color)`
+- `input.hasFocus + button`
+  - `color: var(--search-input-color)`
+- `div.results`
+  - `background-color: var(--search-hits-bg-color, white)`
+  - `box-shadow: var(--search-hits-shadow, 0 0 2pt black)`
 
 For example:
 
@@ -273,9 +282,9 @@ For example:
   indices={{ Pages: SearchHit, Posts: SearchHit }}
   {appId}
   {searchKey}
-  --hitsBgColor="var(--bodyBg)"
-  --inputColor="var(--textColor)"
-  --iconColor="var(--linkColor)"
+  --hitsBgColor="var(--search-body-bg)"
+  --inputColor="var(--search-text-color)"
+  --iconColor="var(--search-link-color)"
 />
 ```
 

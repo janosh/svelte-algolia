@@ -1,7 +1,7 @@
 <script>
+  import Search from '$lib/Search.svelte'
+  import SearchIcon from '$lib/SearchIcon.svelte'
   import PokemonHit from '../components/PokemonHit.svelte'
-  import Search from '../lib/Search.svelte'
-  import SearchIcon from '../lib/SearchIcon.svelte'
 
   const appId = import.meta.env.VITE_ALGOLIA_APP_ID
   const searchKey = import.meta.env.VITE_ALGOLIA_SEARCH_KEY
@@ -33,7 +33,7 @@
       indices={{ Pokedex: PokemonHit }}
       on:focus={() => (searchEverFocused = true)}
       placeholder="Search Pokedex"
-      --hitsBgColor="black"
+      --search-hits-bg-color="black"
     />
   </div>
 </header>

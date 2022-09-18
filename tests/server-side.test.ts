@@ -1,7 +1,7 @@
+import { indexAlgolia } from '$lib/server-side'
 import algoliasearch from 'algoliasearch'
 import 'dotenv/config'
 import { beforeEach, expect, test } from 'vitest'
-import { indexAlgolia } from '../src/lib/server-side'
 // data from https://git.io/J3hvR
 import pokedex from './fixtures/pokedex.json'
 

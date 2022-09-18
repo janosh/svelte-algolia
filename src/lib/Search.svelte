@@ -1,18 +1,18 @@
 <script lang="ts">
   import type { Hit } from '@algolia/client-search'
-  import algoliasearch, { SearchClient } from 'algoliasearch/lite'
+  import algoliasearch, { type SearchClient } from 'algoliasearch/lite'
   import { onMount, SvelteComponent } from 'svelte'
   import SearchIcon from './SearchIcon.svelte'
 
   export let appId: string
-  export let ariaLabel = `Search`
-  export let hasFocus = false
+  export let ariaLabel: string = `Search`
+  export let hasFocus: boolean = false
   export let indices:
     | Record<string, typeof SvelteComponent>
     | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
-  export let loadingMsg = `Searching...`
+  export let loadingMsg: string = `Searching...`
   export let noResultMsg = (query: string): string => `No results for '${query}'`
-  export let placeholder = `Search`
+  export let placeholder: string = `Search`
   export let resultCounter = (hits: SearchHit[]): string =>
     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
   export let searchKey: string
@@ -112,37 +112,37 @@
 </aside>
 
 <style>
-  aside.svelte-algolia {
+  :where(aside.svelte-algolia) {
     position: relative;
     display: flex;
     flex-direction: row-reverse;
   }
-  button {
+  :where(button) {
+    color: var(--search-icon-color);
     align-items: center;
     padding: 0;
     grid-area: search;
-    color: var(--iconColor);
     position: relative;
     background: transparent;
     border: none;
     font-size: 2ex;
   }
-  h2 {
-    color: var(--headingColor);
+  :where(h2) {
+    color: var(--search-heading-color);
     border-bottom: 1px solid;
     text-align: center;
     position: relative;
   }
-  h2 :global(span) {
+  :where(h2 :global(span)) {
     position: absolute;
     font-size: 1ex;
     bottom: 0;
     right: 0;
   }
-  input {
-    background: var(--inputBg);
-    color: var(--inputColor);
-    font-size: var(--inputFontSize, 1em);
+  :where(input) {
+    background: var(--search-input-bg);
+    color: var(--search-input-color);
+    font-size: var(--search-input-font-size, 1em);
     border-radius: 5pt;
     border: 0;
     outline: none;
@@ -154,7 +154,7 @@
     height: 2.5ex;
     line-height: inherit;
   }
-  input.hasFocus {
+  :where(input.hasFocus) {
     opacity: 1;
     width: 8em;
     box-sizing: border-box;
@@ -163,15 +163,15 @@
     margin-left: -2.5ex;
     border-radius: 3pt;
   }
-  input::placeholder {
-    color: var(--inputColor);
+  :where(input::placeholder) {
+    color: var(--search-input-color);
   }
-  input.hasFocus + button {
-    color: var(--inputColor);
+  :where(input.hasFocus + button) {
+    color: var(--search-input-color);
   }
-  div.results {
-    background-color: var(--hitsBgColor, white);
-    box-shadow: var(--hitsShadow, 0 0 2pt black);
+  :where(div.results) {
+    background-color: var(--search-hits-bg-color, white);
+    box-shadow: var(--search-hits-shadow, 0 0 2pt black);
     z-index: 1;
     top: 3ex;
     max-height: 60vh;
@@ -186,7 +186,7 @@
     overscroll-behavior: none;
     overflow-wrap: break-word;
   }
-  section {
+  :where(section) {
     font-size: 0.7em;
     white-space: initial;
     width: 100%;
