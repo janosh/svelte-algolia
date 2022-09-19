@@ -10,9 +10,11 @@
   export let indices:
     | Record<string, typeof SvelteComponent>
     | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
+  export let input: HTMLInputElement | null = null
   export let loadingMsg: string = `Searching...`
   export let noResultMsg = (query: string): string => `No results for '${query}'`
   export let placeholder: string = `Search`
+  export let query: string = ``
   export let resultCounter = (hits: SearchHit[]): string =>
     hits.length > 0 ? `<span>Results: ${hits.length}<span>` : ``
   export let searchKey: string
@@ -26,8 +28,7 @@
   $: _indices = Array.isArray(indices) ? Object.fromEntries(indices) : indices
 
   let client: SearchClient
-  let input: HTMLInputElement
-  let query = ``
+  let aside: HTMLElement
   let promise: Promise<{ index: string | undefined; hits: SearchHit[] }[]>
 
   onMount(() => (client = algoliasearch(appId, searchKey)))
@@ -54,9 +55,15 @@
 
     return results.map(({ hits, index }) => ({ hits: processHits(hits), index }))
   }
+
+  function close(event: MouseEvent) {
+    if (!aside.contains(event.target as Node)) hasFocus = false
+  }
 </script>
 
-<aside class="svelte-algolia">
+<svelte:window on:click={close} />
+
+<aside class="svelte-algolia" bind:this={aside}>
   <input
     type="text"
     bind:this={input}
@@ -64,7 +71,6 @@
     on:keyup={() => (promise = search())}
     on:focus
     on:blur
-    on:blur={() => (hasFocus = false)}
     {placeholder}
     aria-label={ariaLabel}
     class:hasFocus

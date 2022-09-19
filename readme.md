@@ -200,6 +200,12 @@ Full list of props/bindable variables for this component:
    Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.
 
 1. ```ts
+   input: HTMLInputElement | null = null
+   ```
+
+   Handle to the <input type="text" /> DOM node.
+
+1. ```ts
    loadingMsg: string = `Searching...`
    ```
 
@@ -216,6 +222,12 @@ Full list of props/bindable variables for this component:
    ```
 
    Placeholder shown in the text input before user starts typing.
+
+1. ```ts
+   query: string = ``
+   ```
+
+   Current value of the <input type="text" /> DOM node.
 
 1. ```ts
    resultCounter = (hits: SearchHit[]): string =>
