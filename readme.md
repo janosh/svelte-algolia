@@ -26,9 +26,9 @@ Utility for server-side Algolia index updates plus a client-side search componen
 
 <slot />
 
-There are three steps to setting up `svelte-algolia`:
+There are 3 steps to setting up `svelte-algolia`:
 
-1. `npm i -D svelte-algolia`
+1. `npm install --dev svelte-algolia`
 2. Setup your [server-side index updates](#2-server-side-index-updates).
 3. Integrate the [client-side search component](#3-client-side-ui) into your site.
 
@@ -98,7 +98,7 @@ To use this package as part of a build process (e.g. in a [SvelteKit](https://ki
 ```js
 // svelte.config.js
 
-// only update Algolia indices on production builds (saves Algolia API quota)
+// only update Algolia indices on production builds (saves API quota)
 if (process.env.NODE_ENV === `production`) {
   const { indexAlgolia } = await import(`svelte-algolia/server-side`)
 
@@ -194,7 +194,7 @@ Full list of props/bindable variables for this component:
    Bindable boolean indicating whether the text input or results pane currently has focus.
 
 1. ```ts
-   indices: | Record<string, typeof SvelteComponent> | [string, typeof SvelteComponent][] // [indexName, component to render search results from that index]
+   indices: Record<string, typeof SvelteComponent> | [string, typeof SvelteComponent][]
    ```
 
    Object mapping the name of each index the `Search` component should tap into for finding Search results to the Svelte component that should render those hits.
@@ -325,7 +325,7 @@ Using `svelte-algolia` yourself? [Submit a PR](https://github.com/janosh/svelte-
 
 [PRs](https://github.com/janosh/svelte-algolia/pulls) are welcome but best [open an issue](https://github.com/janosh/svelte-algolia/issues/new) first to discuss changes.
 
-The app ID and search key `.env` were intentionally committed so you can clone this repo and work on it without having to create your own index first. To get a dev server running locally so you can try out changes in `src/lib` as you make them, use
+The app ID and search key `.env` were intentionally committed so you can clone this repo and work on it without having to create your own index first. To try out your changes in a dev server running locally, use
 
 ```sh
 git clone https://github.com/janosh/svelte-algolia
