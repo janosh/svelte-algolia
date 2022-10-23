@@ -13,7 +13,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "package": "svelte-package",
-    "serve": "yarn build && yarn preview",
+    "serve": "pnpm build && pnpm preview",
     "test": "vitest"
   },
   "keywords": [
@@ -33,6 +33,7 @@
     "@sveltejs/package": "^1.0.0-next.5",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
+    "devalue": "^4.0.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.24.0",
     "eslint-plugin-svelte3": "^4.0.0",
