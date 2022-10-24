@@ -3,7 +3,8 @@ import type {
   ObjectWithObjectID,
   Settings as IndexSettings,
 } from '@algolia/client-search'
-import algoliasearch, { SearchClient, SearchIndex } from 'algoliasearch'
+import type { SearchClient, SearchIndex } from 'algoliasearch'
+import algoliasearch from 'algoliasearch'
 
 type MaybePromise<T> = T | Promise<T> | PromiseLike<T>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Hit } from '@algolia/client-search'
-  import algoliasearch, { type SearchClient } from 'algoliasearch/lite'
+  import type { SearchClient } from 'algoliasearch/lite'
+  import algoliasearch from 'algoliasearch/lite'
   import { onMount, SvelteComponent } from 'svelte'
   import SearchIcon from './SearchIcon.svelte'
 
