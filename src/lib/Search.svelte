@@ -93,18 +93,18 @@
     <div class="results">
       {#await promise}
         <p>{loadingMsg}</p>
-      {:then allHits}
-        {#if allHits?.some(({ hits }) => hits.length)}
-          {#each allHits as { index: idxName, hits } (idxName)}
+      {:then all_hits}
+        {#if all_hits?.some(({ hits }) => hits.length)}
+          {#each all_hits as { index: index_name, hits } (index_name)}
             {#if hits.length}
               <section>
                 <h2>
-                  {idxName}
+                  {index_name}
                   {@html resultCounter(hits)}
                 </h2>
                 {#each hits as hit (hit.objectID)}
                   <svelte:component
-                    this={_indices[idxName]}
+                    this={_indices[index_name]}
                     {hit}
                     on:close={() => (hasFocus = false)}
                   />

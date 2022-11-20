@@ -8,14 +8,14 @@
 [![Tests](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml/badge.svg)](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/main.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/main)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/496f6094-b6b2-4929-ab16-ba2fdc61d57e/deploy-status)](https://app.netlify.com/sites/svelte-algolia/deploys)
+[![Docs](https://github.com/janosh/svelte-aloglia/actions/workflows/docs.yml/badge.svg)](https://github.com/janosh/svelte-aloglia/actions/workflows/docs.yml)
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-darkblue?logo=stackblitz)](https://stackblitz.com/github/janosh/svelte-algolia)
 
 </h4>
 
 <div class="hide-in-docs">
 
-[**Live Demo**](https://svelte-algolia.netlify.app)
+[**Live Demo**](https://janosh.github.io/svelte-algolia)
 
 </div>
 
@@ -335,4 +335,4 @@ npm install
 npm run dev
 ```
 
-Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for [this demo site](https://svelte-algolia.netlify.app) while developing.
+Note the `sed` command that changes the index name in `site/svelte.config.js` from `'Pokedex'` to `'Pokedex Clone'` so you don't accidentally mess up the search index for [this demo site](https://janosh.github.io/svelte-algolia) while developing.
