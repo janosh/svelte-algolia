@@ -32,7 +32,7 @@ There are 3 steps to setting up `svelte-algolia`:
 2. Setup your [server-side index updates](#2-server-side-index-updates).
 3. Integrate the [client-side search component](#3-client-side-ui) into your site.
 
-## 2. Server-Side Index Updates
+## Server-Side Index Updates
 
 1. Create an `algoliaConfig` object:
 
@@ -109,7 +109,7 @@ if (process.env.NODE_ENV === `production`) {
 }
 ```
 
-## 3. Client Side UI
+## Client Side UI
 
 `<Search />` needs your Algolia app's ID and search key to access its search indices as well as a mapping from index names to corresponding Svelte-component that should render search hits coming from that index. Each hit component receives a `hit` object as prop with all attributes stored in the Algolia index.
 

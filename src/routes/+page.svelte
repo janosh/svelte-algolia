@@ -6,7 +6,7 @@
 </script>
 
 <Toc
-  headingSelector="h2, h3, h4"
+  headingSelector="main > :where(h2, h3)"
   --toc-mobile-bg="black"
   --toc-mobile-btn-color="white"
   --toc-desktop-margin="11em 0 0 0"
