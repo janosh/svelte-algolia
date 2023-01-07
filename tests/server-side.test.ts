@@ -3,7 +3,7 @@ import algoliasearch from 'algoliasearch'
 import 'dotenv/config'
 import { beforeEach, expect, test } from 'vitest'
 // data from https://git.io/J3hvR
-import pokedex from './fixtures/pokedex.json'
+import pokedex from '$site/pokedex.json'
 
 const { VITE_ALGOLIA_APP_ID: appId, ALGOLIA_ADMIN_KEY: apiKey } = process.env
 const client = algoliasearch(appId, apiKey)

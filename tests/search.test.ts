@@ -1,7 +1,7 @@
 import Search from '$lib'
+import PokemonHit from '$site/PokemonHit.svelte'
 import { tick } from 'svelte'
 import { describe, expect, test } from 'vitest'
-import PokemonHit from '../src/components/PokemonHit.svelte'
 
 const appId = process.env.VITE_ALGOLIA_APP_ID as string
 const searchKey = process.env.VITE_ALGOLIA_SEARCH_KEY as string

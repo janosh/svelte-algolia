@@ -29,8 +29,8 @@ Utility for server-side Algolia index updates plus a client-side search componen
 There are 3 steps to setting up `svelte-algolia`:
 
 1. `npm install --dev svelte-algolia`
-2. Setup your [server-side index updates](#2-server-side-index-updates).
-3. Integrate the [client-side search component](#3-client-side-ui) into your site.
+1. Setup your server-side index updates.
+1. Integrate the client-side search component into your site.
 
 ## Server-Side Index Updates
 
@@ -62,7 +62,7 @@ There are 3 steps to setting up `svelte-algolia`:
 
    The settings object applies to all indices. You can also pass a settings object to each index individually which overrides the general one.
 
-2. Pass your config to `indexAlgolia`:
+1. Pass your config to `indexAlgolia`:
 
    ```js
    import { indexAlgolia } from 'svelte-algolia/server-side'
@@ -116,7 +116,7 @@ if (process.env.NODE_ENV === `production`) {
 ```svelte
 <script>
   import Search from 'svelte-algolia'
-  import PokemonHit from '../components/PokemonHit.svelte'
+  import PokemonHit from '$site/PokemonHit.svelte'
 
   const appId = '0OJ5UL9OJX'
   const searchKey = '63f563566cdd6de606e2bb0fdc291994'

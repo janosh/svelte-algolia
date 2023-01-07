@@ -1,8 +1,8 @@
 <script>
+  import Readme from '$root/readme.md'
+  import Example from '$site/Example.svelte'
   import GitHubCorner from 'svelte-github-corner'
   import Toc from 'svelte-toc'
-  import Readme from '../../readme.md'
-  import Example from '../components/Example.svelte'
 </script>
 
 <Toc
