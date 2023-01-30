@@ -1,8 +1,9 @@
 <script>
+  import { repository } from '$root/package.json'
   import Readme from '$root/readme.md'
   import Example from '$site/Example.svelte'
-  import GitHubCorner from 'svelte-github-corner'
   import Toc from 'svelte-toc'
+  import { GitHubCorner } from 'svelte-zoo'
 </script>
 
 <Toc
@@ -13,9 +14,9 @@
 />
 
 <GitHubCorner
-  href="https://github.com/janosh/svelte-algolia"
-  --ghc-color="var(--body-bg)"
-  --ghc-bg="white"
+  href={repository}
+  --zoo-github-corner-color="var(--body-bg)"
+  --zoo-github-corner-bg="white"
 />
 
 <main>

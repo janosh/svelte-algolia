@@ -1,7 +1,7 @@
 import { dev } from '$app/environment'
+import { indexAlgolia } from '$lib/server-side'
 import pokedex from '$site/pokedex.json'
 import 'dotenv/config'
-import { indexAlgolia } from './lib/server-side'
 
 const appId = process.env.VITE_ALGOLIA_APP_ID
 const apiKey = process.env.ALGOLIA_ADMIN_KEY

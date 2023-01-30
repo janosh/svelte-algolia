@@ -8,7 +8,7 @@
 [![Tests](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml/badge.svg)](https://github.com/janosh/svelte-algolia/actions/workflows/test.yml)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/janosh/svelte-algolia/main.svg)](https://results.pre-commit.ci/latest/github/janosh/svelte-algolia/main)
 [![NPM version](https://img.shields.io/npm/v/svelte-algolia?color=blue&logo=NPM)](https://npmjs.com/package/svelte-algolia)
-[![Docs](https://github.com/janosh/svelte-aloglia/actions/workflows/docs.yml/badge.svg)](https://github.com/janosh/svelte-aloglia/actions/workflows/docs.yml)
+[![GitHub Pages](https://github.com/janosh/svelte-aloglia/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/janosh/svelte-aloglia/actions/workflows/gh-pages.yml)
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-darkblue?logo=stackblitz)](https://stackblitz.com/github/janosh/svelte-algolia)
 
 </h4>
