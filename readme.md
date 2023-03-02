@@ -95,11 +95,13 @@ const defaultConfig = {
 
 To use this package as part of a build process (e.g. in a [SvelteKit](https://kit.svelte.dev) app), simply call `indexAlgolia` in your build config:
 
+<!-- use env['NODE_ENV'] to avoid https://github.com/vitejs/vite/issues/10140 -->
+
 ```js
 // svelte.config.js
 
 // only update Algolia indices on production builds (saves API quota)
-if (process.env.NODE_ENV === `production`) {
+if (process.env['NODE_ENV'] === `production`) {
   const { indexAlgolia } = await import(`svelte-algolia/server-side`)
 
   const algoliaConfig = {

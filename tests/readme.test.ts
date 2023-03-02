@@ -1,9 +1,8 @@
-import { readFileSync } from 'fs'
+import src from '$lib/Search.svelte?raw'
 import { expect, test } from 'vitest'
+import readme from '../readme.md?raw'
 
-const readme = readFileSync(`readme.md`, `utf8`)
 const component = `Search.svelte`
-const src = readFileSync(`src/lib/${component}`, `utf8`)
 
 test(`readme documents all props and their correct types and defaults`, () => {
   for (const [idx, line] of src.split(`\n`).entries()) {
