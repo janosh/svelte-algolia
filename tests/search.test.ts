@@ -21,7 +21,7 @@ test(`Search focuses input on icon click`, async () => {
   expect(document.querySelector(`input.hasFocus`)).toBeFalsy()
 
   const btn = document.querySelector(
-    `button[title='${ariaLabel}']`
+    `button[title='${ariaLabel}']`,
   ) as HTMLButtonElement
 
   btn?.click()
@@ -40,11 +40,11 @@ describe(`Search`, () => {
     expect(search).toBeTruthy()
 
     expect(
-      document.querySelector(`input[aria-label='${ariaLabel}']`)
+      document.querySelector(`input[aria-label='${ariaLabel}']`),
     ).toBeTruthy()
 
     expect(
-      document.querySelector(`input[placeholder='${placeholder}']`)
+      document.querySelector(`input[placeholder='${placeholder}']`),
     ).toBeTruthy()
   })
 })
