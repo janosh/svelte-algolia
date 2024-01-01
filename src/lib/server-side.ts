@@ -43,7 +43,7 @@ export type Config = {
 
 export function deepEqual(
   obj1: Record<string, unknown>,
-  obj2: Record<string, unknown>
+  obj2: Record<string, unknown>,
 ): boolean {
   return obj1 && obj2 && typeof obj1 === `object` && typeof obj1 === typeof obj2
     ? Object.keys(obj1).length === Object.keys(obj2).length &&
@@ -66,7 +66,7 @@ export async function indexAlgolia({
     console.log(
       `svelte-algolia: ${indices.length} ${
         indices.length > 1 ? `indices` : `index`
-      } to update`
+      } to update`,
     )
   }
 
@@ -105,7 +105,7 @@ const updateIndex = (client: SearchClient, config: Options) => {
 }
 
 async function callGetter(
-  getter: IndexConfig[`getData`]
+  getter: IndexConfig[`getData`],
 ): Promise<ObjectWithObjectID[] | void> {
   try {
     const results = await getter()
@@ -114,7 +114,7 @@ async function callGetter(
       if (!obj.objectID && !obj.id && !obj._id)
         console.error(
           `failed to index to svelte-algolia: ${JSON.stringify(obj, null, 2)}` +
-            ` has neither an 'objectID' nor 'id' key`
+            ` has neither an 'objectID' nor 'id' key`,
         )
       // convert to string to prevent processing items with integer IDs as new in partialUpdate
       obj.objectID = `${obj.objectID || obj.id || obj._id}`
@@ -130,7 +130,7 @@ async function overwriteUpdate(
   index: SearchIndex,
   data: ObjectWithObjectID[],
   client: SearchClient,
-  config: Options
+  config: Options,
 ) {
   const { indexName: name } = index
   try {
@@ -156,7 +156,7 @@ async function partialUpdate(
   index: SearchIndex,
   data: ObjectWithObjectID[],
   matchFields: string[],
-  config: Options
+  config: Options,
 ) {
   const { indexName: name } = index
   const existingObjects = await fetchExistingData(index, matchFields)
@@ -176,7 +176,7 @@ async function partialUpdate(
         console.error(
           `when partialUpdates is true, the objects must have at least one of the match fields.` +
             `Current object:\n${JSON.stringify(newObj, null, 2)}` +
-            `\nexpected one of these fields:\n${matchFields.join(`\n`)}`
+            `\nexpected one of these fields:\n${matchFields.join(`\n`)}`,
         )
       }
       const existingObj = existingObjects.find((obj) => obj.objectID === id)
@@ -198,7 +198,7 @@ async function partialUpdate(
   if (toIndex.length) {
     if (config.verbosity > 0)
       console.log(
-        `index '${name}': found ${toIndex.length} new or modified objects; indexing...`
+        `index '${name}': found ${toIndex.length} new or modified objects; indexing...`,
       )
     if (config.verbosity > 1) console.log(JSON.stringify(toIndex, null, 2))
     await index.saveObjects(toIndex).wait()
@@ -207,7 +207,7 @@ async function partialUpdate(
   if (toRemove.length) {
     if (config.verbosity > 0)
       console.log(
-        `index '${name}': found ${toRemove.length} stale objects; removing...`
+        `index '${name}': found ${toRemove.length} stale objects; removing...`,
       )
     if (config.verbosity > 1) console.log(JSON.stringify(toRemove, null, 2))
     await index.deleteObjects(toRemove)
@@ -225,7 +225,7 @@ async function partialUpdate(
 // Fetches all records for the current index from Algolia
 async function fetchExistingData(
   index: SearchIndex,
-  attributesToRetrieve: string[]
+  attributesToRetrieve: string[],
 ) {
   const hits: ObjectWithObjectID[] = []
   await index.browseObjects({

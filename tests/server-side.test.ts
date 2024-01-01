@@ -40,7 +40,7 @@ const assertIndex = async () => {
   // does not hold when swapping local and indexed Caterpie
   // as Algolia adds new keys in returned hits
   expect(Object.keys(localCaterpie).every((key) => indexedCaterpie[key])).toBe(
-    true
+    true,
   )
 }
 
